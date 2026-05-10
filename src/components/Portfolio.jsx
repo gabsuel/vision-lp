@@ -25,7 +25,7 @@ const properties = [
 
 function Card({ p }) {
   return (
-    <div className="group relative aspect-[4/5] w-[320px] shrink-0 cursor-pointer overflow-hidden rounded-[2rem] border border-white/5 shadow-2xl md:aspect-video md:w-[500px]">
+    <div className="relative aspect-[4/5] w-[320px] shrink-0 md:aspect-video md:w-[500px]">
       <img
         src={p.img}
         alt={p.title}
@@ -33,17 +33,8 @@ function Card({ p }) {
         decoding="async"
         width="500"
         height="281"
-        className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+        className="h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="absolute bottom-6 left-6 translate-y-2 transition-transform duration-500 group-hover:translate-y-0 md:bottom-8 md:left-8">
-        <p className="font-montserrat text-xl font-medium text-white drop-shadow-lg md:text-3xl">
-          {p.title}
-        </p>
-        <p className="mt-2 text-xs font-bold uppercase tracking-widest text-gold drop-shadow-md">
-          {p.location}
-        </p>
-      </div>
     </div>
   )
 }

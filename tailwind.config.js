@@ -40,7 +40,7 @@ export default {
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-100% - 2rem))' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       animation: {

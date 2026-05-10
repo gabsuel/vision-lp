@@ -54,7 +54,7 @@ export default function Reviews() {
       <div className="relative z-10 w-full overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-base to-transparent md:w-32" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-base to-transparent md:w-32" />
-        <div className="marquee-track marquee-track-fast">
+        <div className="marquee-track marquee-track-fast marquee-track-gap">
           {loop.map((r, i) => (
             <Card key={`${r.name}-${i}`} r={r} />
           ))}
