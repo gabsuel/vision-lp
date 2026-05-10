@@ -90,6 +90,10 @@ export default function Services() {
                     <img
                       src={s.img}
                       alt={s.title.replace('\n', ' ')}
+                      loading="lazy"
+                      decoding="async"
+                      width="1000"
+                      height="750"
                       className="h-full w-full object-cover"
                     />
                     <div

@@ -2,8 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const TOTAL_FRAMES = 169
+const isMobile = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(max-width: 767px)').matches
+const FRAME_DIR = () =>
+  isMobile() ? 'eye-zoom-frames-mobile' : 'eye-zoom-frames'
 const FRAME_SRC = (i) =>
-  `/videos/eye-zoom-frames/f${String(i).padStart(3, '0')}.jpg`
+  `/videos/${FRAME_DIR()}/f${String(i).padStart(3, '0')}.jpg`
 
 export default function EyeZoom() {
   const containerRef = useRef(null)

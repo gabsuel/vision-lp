@@ -29,6 +29,10 @@ function Card({ p }) {
       <img
         src={p.img}
         alt={p.title}
+        loading="lazy"
+        decoding="async"
+        width="500"
+        height="281"
         className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
@@ -50,7 +54,7 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="relative z-10 -mt-[30vh] overflow-hidden bg-base pb-24"
+      className="relative z-10 -mt-[15vh] overflow-hidden bg-base pb-24 md:-mt-[30vh]"
     >
       <div className="relative w-full overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-base to-transparent md:w-32" />
