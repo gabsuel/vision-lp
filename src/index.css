@@ -143,16 +143,13 @@
 @layer utilities {
   .marquee-track {
     display: flex;
+    gap: 2rem;
     animation: marquee 45s linear infinite;
     width: max-content;
   }
 
   .marquee-track-fast {
     animation-duration: 35s;
-  }
-
-  .marquee-track-gap {
-    gap: 2rem;
   }
 
   .marquee-mask {

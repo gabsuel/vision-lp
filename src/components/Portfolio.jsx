@@ -25,7 +25,7 @@ const properties = [
 
 function Card({ p }) {
   return (
-    <div className="relative aspect-[4/5] w-[320px] shrink-0 md:aspect-video md:w-[500px]">
+    <div className="relative aspect-[4/5] w-[320px] shrink-0 overflow-hidden rounded-2xl md:aspect-video md:w-[500px]">
       <img
         src={p.img}
         alt={p.title}
