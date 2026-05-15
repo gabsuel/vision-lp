@@ -58,6 +58,134 @@
                 linear-gradient(180deg, #F0D87C 0%, #D4AF37 50%, #9F7928 100%) border-box;
             border: 1.5px solid transparent;
         }
+
+        /* ====== Portfolio Carousel ====== */
+        .portfolio-stage {
+            position: relative;
+            height: 440px;
+        }
+        @media (min-width: 640px) {
+            .portfolio-stage { height: 560px; }
+        }
+
+        .portfolio-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220px;
+            aspect-ratio: 9 / 16;
+            transform: translate(-50%, -50%);
+            transition:
+                transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 600ms ease,
+                filter 600ms ease,
+                box-shadow 600ms ease;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #050505;
+            will-change: transform, opacity, filter;
+        }
+        @media (min-width: 640px) {
+            .portfolio-card { width: 280px; }
+        }
+
+        .portfolio-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-card.pc-current {
+            transform: translate(-50%, -50%) scale(1.05);
+            opacity: 1;
+            filter: none;
+            z-index: 3;
+            box-shadow:
+                0 0 0 1px rgba(212, 175, 55, 0.55),
+                0 0 60px -10px rgba(212, 175, 55, 0.45),
+                0 20px 50px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .portfolio-card.pc-prev {
+            transform: translate(calc(-50% - 145px), -50%) scale(0.72);
+            opacity: 0.35;
+            filter: blur(2px) saturate(0.6);
+            z-index: 2;
+        }
+        .portfolio-card.pc-next {
+            transform: translate(calc(-50% + 145px), -50%) scale(0.72);
+            opacity: 0.35;
+            filter: blur(2px) saturate(0.6);
+            z-index: 2;
+        }
+        @media (min-width: 640px) {
+            .portfolio-card.pc-prev { transform: translate(calc(-50% - 210px), -50%) scale(0.75); }
+            .portfolio-card.pc-next { transform: translate(calc(-50% + 210px), -50%) scale(0.75); }
+        }
+
+        .portfolio-card.pc-far-left {
+            transform: translate(calc(-50% - 400px), -50%) scale(0.5);
+            opacity: 0;
+            filter: blur(4px);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .portfolio-card.pc-far-right {
+            transform: translate(calc(-50% + 400px), -50%) scale(0.5);
+            opacity: 0;
+            filter: blur(4px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .portfolio-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.55);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition:
+                background 250ms ease,
+                color 250ms ease,
+                border-color 250ms ease,
+                transform 250ms ease,
+                box-shadow 250ms ease;
+        }
+        @media (min-width: 640px) {
+            .portfolio-arrow { width: 52px; height: 52px; }
+        }
+        .portfolio-arrow:hover {
+            background: linear-gradient(180deg, #F0D87C 0%, #D4AF37 50%, #9F7928 100%);
+            color: #000;
+            border-color: rgba(212, 175, 55, 1);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.55);
+        }
+        .portfolio-arrow:active {
+            transform: translateY(-50%) scale(0.94);
+        }
+        .portfolio-arrow svg {
+            width: 22px;
+            height: 22px;
+        }
+        .portfolio-arrow-prev { left: 4px; }
+        .portfolio-arrow-next { right: 4px; }
+        @media (min-width: 640px) {
+            .portfolio-arrow-prev { left: 16px; }
+            .portfolio-arrow-next { right: 16px; }
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200">
@@ -130,7 +258,7 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section class="py-16 sm:py-20 bg-black border-t border-gold/10">
+    <section class="py-16 sm:py-20 bg-black border-t border-gold/10 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 sm:mb-16">
                 <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Nosso <span class="gold-text">Portfolio</span></h2>
@@ -139,19 +267,22 @@
                 </p>
             </div>
 
-            <div class="max-w-sm mx-auto">
-                <div class="relative rounded-2xl overflow-hidden ring-1 ring-gold/30 shadow-gold-soft bg-zinc-950 aspect-[9/16]">
-                    <video id="portfolio-video"
-                           class="w-full h-full object-cover"
-                           autoplay
-                           muted
-                           playsinline
-                           preload="auto">
-                    </video>
-                </div>
+            <div class="relative mx-auto max-w-3xl">
+                <div id="portfolio-stage" class="portfolio-stage"></div>
 
-                <div id="portfolio-dots" class="flex justify-center gap-2 mt-6"></div>
+                <button id="portfolio-prev" class="portfolio-arrow portfolio-arrow-prev" aria-label="Vídeo anterior">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button id="portfolio-next" class="portfolio-arrow portfolio-arrow-next" aria-label="Próximo vídeo">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
             </div>
+
+            <div id="portfolio-dots" class="flex justify-center gap-2 mt-8"></div>
         </div>
     </section>
 
@@ -268,11 +399,11 @@
         </div>
     </footer>
 
-    <!-- Portfolio: carrossel de vídeos em loop infinito -->
+    <!-- Portfolio: carrossel com previews laterais e setas de navegação -->
     <script>
         // === Edite aqui: cole os links dos seus vídeos de portfolio ===
         // Pode ser URL externa (Cloudflare Stream, R2, Vimeo direct mp4) ou caminho local (ex: "assets/videos/imovel-01.mp4").
-        // Adicione/remova quantos quiser — os indicadores se ajustam sozinhos.
+        // Adicione/remova quantos quiser — previews e indicadores se ajustam sozinhos.
         const portfolioVideos = [
             "assets/videos/alpha-1.mp4",
             "assets/videos/alpha-4.mp4",
@@ -280,18 +411,56 @@
         ];
 
         (function () {
-            const video  = document.getElementById('portfolio-video');
-            const dotsEl = document.getElementById('portfolio-dots');
-            if (!video || !dotsEl || portfolioVideos.length === 0) return;
+            const stage   = document.getElementById('portfolio-stage');
+            const dotsEl  = document.getElementById('portfolio-dots');
+            const prevBtn = document.getElementById('portfolio-prev');
+            const nextBtn = document.getElementById('portfolio-next');
+            if (!stage || portfolioVideos.length === 0) return;
 
+            const len = portfolioVideos.length;
             let current = 0;
+            let isAnimating = false;
 
-            portfolioVideos.forEach(() => {
-                const dot = document.createElement('span');
-                dotsEl.appendChild(dot);
+            // --- Build cards + dots ---
+            const cards = portfolioVideos.map((url, i) => {
+                const card = document.createElement('div');
+                card.className = 'portfolio-card';
+                card.dataset.idx = i;
+
+                const v = document.createElement('video');
+                v.src = url;
+                v.muted = true;
+                v.playsInline = true;
+                v.preload = 'metadata';
+                v.addEventListener('ended', () => {
+                    if (parseInt(card.dataset.idx, 10) === current) go(1);
+                });
+                card.appendChild(v);
+                stage.appendChild(card);
+
+                if (dotsEl) {
+                    const dot = document.createElement('span');
+                    dotsEl.appendChild(dot);
+                }
+                return card;
             });
 
+            // --- Slot resolver (returns 'current' | 'prev' | 'next' | 'far-left' | 'far-right') ---
+            function slotFor(i) {
+                const diff = ((i - current) % len + len) % len;
+                if (diff === 0) return 'current';
+                if (diff === 1) return 'next';
+                if (diff === len - 1) return 'prev';
+                return diff <= len / 2 ? 'far-right' : 'far-left';
+            }
+
+            function setSlot(card, slot) {
+                card.classList.remove('pc-current', 'pc-prev', 'pc-next', 'pc-far-left', 'pc-far-right');
+                card.classList.add('pc-' + slot);
+            }
+
             function updateDots() {
+                if (!dotsEl) return;
                 dotsEl.querySelectorAll('span').forEach((d, i) => {
                     d.className = i === current
                         ? 'h-2 w-6 rounded-full bg-gold transition-all duration-300'
@@ -299,18 +468,64 @@
                 });
             }
 
-            function load(i) {
-                video.src = portfolioVideos[i];
-                video.play().catch(() => {});
-                updateDots();
+            function playOnlyCurrent() {
+                cards.forEach((card, i) => {
+                    const v = card.querySelector('video');
+                    if (i === current) {
+                        v.currentTime = 0;
+                        v.play().catch(() => {});
+                    } else {
+                        v.pause();
+                        v.currentTime = 0;
+                    }
+                });
             }
 
-            video.addEventListener('ended', () => {
-                current = (current + 1) % portfolioVideos.length;
-                load(current);
+            // --- Initial render (no transition flash) ---
+            cards.forEach((c, i) => {
+                c.style.transition = 'none';
+                setSlot(c, slotFor(i));
             });
+            stage.offsetHeight; // force reflow
+            cards.forEach(c => { c.style.transition = ''; });
+            updateDots();
+            playOnlyCurrent();
 
-            load(0);
+            // --- Navigation with wrap-around teleport ---
+            function go(direction) {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                // Teleport the card that's about to "wrap" to the far side without animation
+                // so it can slide in naturally from there.
+                if (len >= 3) {
+                    const wrapIdx = direction > 0
+                        ? (current + 2) % len           // future "next" — coming from prev side
+                        : (current - 2 + len) % len;   // future "prev" — coming from next side
+                    const wrapCard = cards[wrapIdx];
+                    wrapCard.style.transition = 'none';
+                    setSlot(wrapCard, direction > 0 ? 'far-right' : 'far-left');
+                    wrapCard.offsetHeight; // commit
+                    wrapCard.style.transition = '';
+                }
+
+                requestAnimationFrame(() => {
+                    current = (current + direction + len) % len;
+                    cards.forEach((c, i) => setSlot(c, slotFor(i)));
+                    updateDots();
+                    playOnlyCurrent();
+                    setTimeout(() => { isAnimating = false; }, 650);
+                });
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
+            if (nextBtn) nextBtn.addEventListener('click', () => go(1));
+
+            // Keyboard arrows (acessibilidade)
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft')  go(-1);
+                if (e.key === 'ArrowRight') go(1);
+            });
         })();
     </script>
 </body>
