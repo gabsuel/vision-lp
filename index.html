@@ -114,7 +114,7 @@
         .portfolio-card {
             position: absolute; top: 50%; left: 50%; width: 220px; aspect-ratio: 9 / 16;
             transform: translate(-50%, -50%);
-            transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms ease, filter 600ms ease, box-shadow 600ms ease;
+            transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1), opacity 950ms ease, filter 950ms ease, box-shadow 950ms ease;
             border-radius: 10px; overflow: hidden; background: #050505; will-change: transform, opacity, filter;
         }
         @media (min-width: 640px) { .portfolio-card { width: 280px; } }
@@ -129,43 +129,9 @@
             transition: opacity 350ms ease;
         }
         @media (min-width: 640px) { .portfolio-mute { top: 12px; right: 12px; width: 42px; height: 42px; } }
-        .portfolio-card.pc-current .portfolio-mute { opacity: 1; }
-        .portfolio-card:not(.pc-current) .portfolio-mute { pointer-events: none; }
         .portfolio-mute svg { width: 19px; height: 19px; }
 
-        .portfolio-stage { --p: 0; }
-        .portfolio-stage.is-dragging .portfolio-card { transition: none; }
-        .portfolio-card.pc-current {
-            transform: translate(-50%, -50%) scale(1.05); opacity: 1; filter: none; z-index: 3;
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
-        }
-        .portfolio-card.pc-prev { transform: translate(calc(-50% - 145px), -50%) scale(0.72); opacity: 0.35; filter: blur(2px) saturate(0.6); z-index: 2; }
-        .portfolio-card.pc-next { transform: translate(calc(-50% + 145px), -50%) scale(0.72); opacity: 0.35; filter: blur(2px) saturate(0.6); z-index: 2; }
-        @media (min-width: 640px) {
-            .portfolio-card.pc-prev { transform: translate(calc(-50% - 210px), -50%) scale(0.75); }
-            .portfolio-card.pc-next { transform: translate(calc(-50% + 210px), -50%) scale(0.75); }
-        }
-        .portfolio-card.pc-far-left { transform: translate(calc(-50% - 400px), -50%) scale(0.5); opacity: 0; filter: blur(4px); z-index: 1; pointer-events: none; }
-        .portfolio-card.pc-far-right { transform: translate(calc(-50% + 400px), -50%) scale(0.5); opacity: 0; filter: blur(4px); z-index: 1; pointer-events: none; }
-
-        /* Arraste = profundidade: o da frente recua, o próximo vem pra frente (qualquer direção) */
-        .portfolio-stage.is-dragging .portfolio-card.pc-current {
-            transform: translate(-50%, -50%) scale(calc(1.05 - 0.33 * var(--p)));
-            opacity: calc(1 - 0.6 * var(--p));
-            filter: blur(calc(2px * var(--p))) saturate(calc(1 - 0.4 * var(--p)));
-            z-index: 2;
-        }
-        .portfolio-stage.is-dragging .portfolio-card.pc-next {
-            transform: translate(calc(-50% + 145px * (1 - var(--p))), -50%) scale(calc(0.72 + 0.33 * var(--p)));
-            opacity: calc(0.35 + 0.65 * var(--p));
-            filter: blur(calc(2px * (1 - var(--p)))) saturate(calc(0.6 + 0.4 * var(--p)));
-            z-index: 3;
-        }
-        @media (min-width: 640px) {
-            .portfolio-stage.is-dragging .portfolio-card.pc-next {
-                transform: translate(calc(-50% + 210px * (1 - var(--p))), -50%) scale(calc(0.75 + 0.3 * var(--p)));
-            }
-        }
+        /* O posicionamento dos cards é controlado por JS (transform/opacity/filter inline) */
 
         .portfolio-arrow {
             position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
@@ -188,7 +154,7 @@
             background: radial-gradient(circle, rgba(212,175,55,0.16) 0%, rgba(212,175,55,0.05) 35%, transparent 70%);
             pointer-events: none; filter: blur(10px);
         }
-        @keyframes scrollHint { 0%,100% { transform: translate(-50%, 0); opacity: 0.5; } 50% { transform: translate(-50%, 8px); opacity: 1; } }
+        @keyframes scrollHint { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
         .scroll-hint { animation: scrollHint 2.2s ease-in-out infinite; }
 
         /* ====== Menu hambúrguer (vira X) ====== */
@@ -212,7 +178,7 @@
 <body class="bg-black text-gray-200">
 
     <!-- ============ Navbar ============ -->
-    <header class="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+    <header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
         <nav class="relative max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
             <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Vision — início">
                 <span style="font-family: 'Archivo', sans-serif;" class="gold-text font-black lowercase leading-none tracking-tight text-2xl sm:text-3xl">vision</span>
@@ -243,7 +209,7 @@
     <section id="top" class="relative flex flex-col overflow-hidden bg-black" style="min-height: 100vh; min-height: 100svh;">
 
         <!-- Vídeo de fundo — drone em órbita (loop, mudo). Poster aparece enquanto carrega / fallback. -->
-        <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline
+        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover will-change-transform" autoplay loop muted playsinline
                poster="assets/videos/hero-orbit-poster.jpg">
             <source src="assets/videos/hero-orbit.mp4" type="video/mp4">
         </video>
@@ -256,7 +222,7 @@
 
         <!-- Conteúdo — ancorado na base, alinhado à esquerda -->
         <div class="relative z-10 flex-1 flex flex-col justify-end px-6 sm:px-10 lg:px-16 pt-24 pb-24 sm:pb-28">
-            <div class="max-w-2xl text-left">
+            <div id="hero-title" class="max-w-2xl text-left will-change-transform">
                 <h1 data-reveal style="--reveal-delay: 100ms; font-size: clamp(2.5rem, 10vw, 6.5rem); line-height: 0.95; letter-spacing: -0.03em;" class="font-display text-white font-medium">
                     Imóveis que<br>vendem pela <span class="gold-text">imagem</span>.
                 </h1>
@@ -264,7 +230,7 @@
         </div>
 
         <!-- Scroll hint -->
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 scroll-hint flex flex-col items-center gap-1.5 text-gray-400 pointer-events-none">
+        <div id="scroll-hint" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 scroll-hint flex flex-col items-center gap-1.5 text-gray-400 pointer-events-none">
             <span class="text-[10px] uppercase tracking-[0.3em]">Role</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
         </div>
@@ -705,6 +671,30 @@
                 }
             }
 
+            // Efeitos de scroll na hero + header
+            const header     = document.getElementById('site-header');
+            const heroVideo  = document.getElementById('hero-video');
+            const heroTitle  = document.getElementById('hero-title');
+            const scrollHint = document.getElementById('scroll-hint');
+            let scrollTicking = false;
+            function onScroll() {
+                const y = window.scrollY || window.pageYOffset || 0;
+                // Header fica opaco conforme rola (0 -> 1 em ~280px)
+                if (header) header.style.backgroundColor = 'rgba(0,0,0,' + Math.min(1, y / 280) + ')';
+                if (!reduce) {
+                    // h1 sobe mais rápido que o vídeo (parallax)
+                    if (heroTitle) heroTitle.style.transform = 'translateY(' + (-y * 0.35) + 'px)';
+                    if (heroVideo) heroVideo.style.transform = 'translateY(' + (y * 0.12) + 'px) scale(1.05)';
+                }
+                // "Role" some logo nos primeiros pixels
+                if (scrollHint) scrollHint.style.opacity = String(Math.max(0, 1 - y / 120));
+                scrollTicking = false;
+            }
+            window.addEventListener('scroll', () => {
+                if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScroll); }
+            }, { passive: true });
+            onScroll();
+
             // Contadores
             const counters = document.querySelectorAll('[data-count]');
             counters.forEach(el => {
@@ -816,17 +806,63 @@
                 });
             }
 
-            function slotFor(i) {
-                const diff = ((i - current) % len + len) % len;
-                if (diff === 0) return 'current';
-                if (diff === 1) return 'next';
-                if (diff === len - 1) return 'prev';
-                return diff <= len / 2 ? 'far-right' : 'far-left';
+            // ===== Layout contínuo do carrossel (posição -2..+2, dirigido por JS) =====
+            const FAR = 400, BIG = 1.05, FARSCALE = 0.5;
+            let pos = 0; // 0 = repouso; durante o arraste/tween varia de -1 a 1
+            let rafId = null; // id da animação em curso (pra poder interromper)
+
+            function metrics() {
+                const wide = window.matchMedia('(min-width: 640px)').matches;
+                return { OFFSET: wide ? 210 : 145, SMALL: wide ? 0.75 : 0.72 };
             }
 
-            function setSlot(card, slot) {
-                card.classList.remove('pc-current', 'pc-prev', 'pc-next', 'pc-far-left', 'pc-far-right');
-                card.classList.add('pc-' + slot);
+            // base de cada card relativo ao atual: 0=frente, +1=direita, -1=esquerda, ±2=fundo
+            function baseSlot(i) {
+                const diff = ((i - current) % len + len) % len;
+                if (diff === 0) return 0;
+                if (diff === 1) return 1;
+                if (diff === len - 1) return -1;
+                if (diff === 2) return 2;
+                if (diff === len - 2) return -2;
+                return null; // escondido
+            }
+
+            // posição contínua p -> estilo (x, escala, opacidade, blur)
+            function styleFor(p, M) {
+                const a = Math.abs(p), sgn = p < 0 ? -1 : 1;
+                let x, scale, op, blur, sat;
+                if (a <= 1) {
+                    x = M.OFFSET * p;
+                    scale = BIG + (M.SMALL - BIG) * a;
+                    op = 1 - 0.65 * a;
+                    blur = 2 * a;
+                    sat = 1 - 0.4 * a;
+                } else {
+                    const k = Math.min(1, a - 1);
+                    x = sgn * (M.OFFSET + (FAR - M.OFFSET) * k);
+                    scale = M.SMALL + (FARSCALE - M.SMALL) * k;
+                    op = 0.35 * (1 - k);
+                    blur = 2 + 2 * k;
+                    sat = 0.6;
+                }
+                return { x, scale, op, blur, sat, a };
+            }
+
+            function render(t) {
+                const M = metrics();
+                cards.forEach((card, i) => {
+                    const base = baseSlot(i);
+                    if (base === null) { card.style.opacity = '0'; card.style.pointerEvents = 'none'; card.style.zIndex = '0'; return; }
+                    const s = styleFor(base + t, M);
+                    card.style.transform = 'translate(calc(-50% + ' + s.x + 'px), -50%) scale(' + s.scale + ')';
+                    card.style.opacity = String(Math.max(0, s.op));
+                    card.style.filter = 'blur(' + s.blur + 'px) saturate(' + s.sat + ')';
+                    card.style.zIndex = String(Math.round(10 - s.a * 3));
+                    card.style.boxShadow = s.a < 0.5 ? '0 25px 60px -15px rgba(0,0,0,0.85)' : 'none';
+                    card.style.pointerEvents = s.a < 0.5 ? 'auto' : 'none';
+                    const mute = card.querySelector('.portfolio-mute');
+                    if (mute) mute.style.opacity = (base === 0 && s.a < 0.12) ? '1' : '0';
+                });
             }
 
             function updateDots() {
@@ -853,30 +889,43 @@
                 });
             }
 
-            cards.forEach((c, i) => { c.style.transition = 'none'; setSlot(c, slotFor(i)); });
-            stage.offsetHeight;
-            cards.forEach(c => { c.style.transition = ''; });
+            // tudo é animado por rAF -> sem transição CSS nos cards
+            cards.forEach(c => { c.style.transition = 'none'; });
+            render(0);
             updateDots();
             playOnlyCurrent();
+            window.addEventListener('resize', () => { if (!isAnimating && !dragging) render(pos); });
 
+            // ===== Animação programática de pos (rAF) =====
+            const DUR = 750;                              // duração da troca (ms) — ajuste a velocidade aqui
+            const easeOut = x => 1 - Math.pow(1 - x, 3);
+
+            function stopTween() {
+                if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                isAnimating = false;
+            }
+
+            function tweenTo(targetT, direction, dur) {
+                isAnimating = true;
+                const startT = pos, t0 = performance.now(), D = dur || DUR;
+                (function frame(now) {
+                    const k = Math.min(1, (now - t0) / D);
+                    pos = startT + (targetT - startT) * easeOut(k);
+                    render(pos);
+                    if (k < 1) { rafId = requestAnimationFrame(frame); return; }
+                    rafId = null;
+                    pos = 0;
+                    if (direction) { current = (current + direction + len) % len; updateDots(); playOnlyCurrent(); }
+                    render(0);
+                    isAnimating = false;
+                })(t0);
+            }
+
+            // forward (+1): próximo vem pra frente (cards andam pra esquerda, t -> -1)
+            // backward (-1): anterior vem pra frente (cards andam pra direita, t -> +1)
             function go(direction) {
                 if (isAnimating) return;
-                isAnimating = true;
-                if (len >= 3) {
-                    const wrapIdx = direction > 0 ? (current + 2) % len : (current - 2 + len) % len;
-                    const wrapCard = cards[wrapIdx];
-                    wrapCard.style.transition = 'none';
-                    setSlot(wrapCard, direction > 0 ? 'far-right' : 'far-left');
-                    wrapCard.offsetHeight;
-                    wrapCard.style.transition = '';
-                }
-                requestAnimationFrame(() => {
-                    current = (current + direction + len) % len;
-                    cards.forEach((c, i) => setSlot(c, slotFor(i)));
-                    updateDots();
-                    playOnlyCurrent();
-                    setTimeout(() => { isAnimating = false; }, 650);
-                });
+                tweenTo(-direction, direction);
             }
 
             if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
@@ -886,18 +935,15 @@
                 if (e.key === 'ArrowRight') go(1);
             });
 
-            // Arrastar = profundidade em tempo real (o da frente recua, o próximo vem pra frente)
-            let dragX = 0, dragY = 0, dragging = false, horiz = false, progress = 0;
-            const TRAVEL = 130;            // distância (px) pra completar a transição (p = 1)
+            // ===== Arrastar = carrossel seguindo o dedo em tempo real =====
+            let dragX = 0, dragY = 0, dragging = false, horiz = false, dragStartPos = 0;
+            const DRAG_TRAVEL = 240;   // px de arraste pra completar uma troca (maior = mais lento/controlado)
             stage.style.touchAction = 'pan-y';
             stage.style.cursor = 'grab';
 
-            const setP = p => stage.style.setProperty('--p', p);
-            const resetP = () => { stage.classList.remove('is-dragging'); setP(0); };
-
             stage.addEventListener('pointerdown', e => {
-                if (isAnimating) return;
-                dragX = e.clientX; dragY = e.clientY; progress = 0;
+                stopTween();                 // interrompe qualquer animação em curso -> pega na hora
+                dragX = e.clientX; dragY = e.clientY; dragStartPos = pos;
                 dragging = true; horiz = false;
                 stage.style.cursor = 'grabbing';
                 stage.setPointerCapture && stage.setPointerCapture(e.pointerId);
@@ -908,29 +954,25 @@
                 const dx = e.clientX - dragX;
                 const dy = e.clientY - dragY;
                 if (!horiz) {
-                    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;     // ainda indefinido
-                    if (Math.abs(dy) > Math.abs(dx)) { dragging = false; return; } // vertical = deixa rolar a página
+                    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+                    if (Math.abs(dy) > Math.abs(dx)) { dragging = false; return; } // vertical -> rola a página
                     horiz = true;
-                    stage.classList.add('is-dragging');
                 }
-                progress = Math.min(1, Math.abs(dx) / TRAVEL); // qualquer direção avança
-                setP(progress);
+                pos = Math.max(-1, Math.min(1, dragStartPos + dx / DRAG_TRAVEL)); // segue o dedo, continua de onde estava
+                render(pos);
             });
 
             const endDrag = () => {
                 if (!dragging) return;
                 dragging = false;
                 stage.style.cursor = 'grab';
-                if (horiz && progress > 0.5) {
-                    resetP();
-                    go(1);                   // confirma: próximo vem pra frente
-                } else {
-                    resetP();                // volta suave (o da frente retorna)
-                }
+                if (horiz && pos <= -0.5)      tweenTo(-1, 1);   // passou: próximo assume a frente
+                else if (horiz && pos >= 0.5)  tweenTo(1, -1);   // passou: anterior assume a frente
+                else                           tweenTo(0, 0, 350); // não passou: volta pro lugar
                 horiz = false;
             };
             stage.addEventListener('pointerup', endDrag);
-            stage.addEventListener('pointercancel', () => { dragging = false; horiz = false; stage.style.cursor = 'grab'; resetP(); });
+            stage.addEventListener('pointercancel', () => { if (dragging) { dragging = false; horiz = false; stage.style.cursor = 'grab'; tweenTo(0, 0, 300); } });
 
             // Clicar no vídeo (sem arrastar) liga/desliga o som
             stage.addEventListener('click', e => {
