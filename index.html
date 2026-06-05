@@ -185,10 +185,12 @@
 
     <!-- ============ Navbar ============ -->
     <header class="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
-        <nav class="max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
-            <a href="#top" class="flex items-center" aria-label="Vision — início">
+        <nav class="relative max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Vision — início">
                 <span style="font-family: 'Archivo', sans-serif;" class="gold-text font-black lowercase leading-none tracking-tight text-2xl sm:text-3xl">vision</span>
             </a>
+
+            <span class="w-10 h-10"></span>
 
             <!-- Botão hambúrguer -->
             <button id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu"
@@ -230,28 +232,6 @@
                 <h1 data-reveal style="--reveal-delay: 100ms; font-size: clamp(2.5rem, 10vw, 6.5rem); line-height: 0.95; letter-spacing: -0.03em;" class="font-display text-white font-medium">
                     Imóveis que<br>vendem pela <span class="gold-text">imagem</span>.
                 </h1>
-
-                <p data-reveal style="--reveal-delay: 240ms;" class="mt-5 text-xs sm:text-sm text-gray-300 max-w-md leading-relaxed">
-                    Transformamos arquitetura em desejo — e cada detalhe no motivo certo para dizer sim.
-                </p>
-            </div>
-        </div>
-
-        <!-- Legendas (estilo editorial) — base da hero -->
-        <div class="relative z-10 px-6 sm:px-10 lg:px-16 pb-8">
-            <div data-reveal style="--reveal-delay: 520ms;" class="flex items-end justify-between gap-4 border-t border-white/15 pt-5">
-                <!-- Legenda esquerda: detalhe do imóvel em destaque (TODO: editar) -->
-                <div class="text-gray-300">
-                    <p class="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-gold">Imóvel em destaque</p>
-                    <p class="mt-1.5 text-sm sm:text-base text-white">Residência Alphaville · 720 m²</p>
-                </div>
-                <!-- Legenda direita: serviços -->
-                <div class="hidden sm:flex flex-wrap justify-end gap-x-3 gap-y-1 text-xs text-gray-400 uppercase tracking-[0.2em] max-w-xs text-right">
-                    <span>Vídeo</span><span class="text-gold/50">•</span>
-                    <span>Foto</span><span class="text-gold/50">•</span>
-                    <span>Tráfego</span><span class="text-gold/50">•</span>
-                    <span>Marca pessoal</span>
-                </div>
             </div>
         </div>
 
@@ -259,6 +239,29 @@
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 scroll-hint flex flex-col items-center gap-1.5 text-gray-400 pointer-events-none">
             <span class="text-[10px] uppercase tracking-[0.3em]">Role</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </section>
+
+    <!-- ============ Portfólio (carrossel de vídeos) ============ -->
+    <section id="portfolio" class="scroll-mt-24 py-20 sm:py-28 bg-black border-t border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
+                <span data-reveal class="eyebrow">Portfólio</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    Conteúdo bonito é o começo. Conteúdo que <span class="gold-text">converte</span> é o ponto.
+                </h2>
+            </div>
+
+            <div data-reveal="scale" class="relative mx-auto max-w-3xl">
+                <div id="portfolio-stage" class="portfolio-stage"></div>
+                <button id="portfolio-prev" class="portfolio-arrow portfolio-arrow-prev" aria-label="Vídeo anterior">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button id="portfolio-next" class="portfolio-arrow portfolio-arrow-next" aria-label="Próximo vídeo">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            <div id="portfolio-dots" class="flex justify-center gap-2 mt-8"></div>
         </div>
     </section>
 
@@ -335,29 +338,6 @@
                 <span class="font-display text-lg sm:text-xl whitespace-nowrap">@solar.residencial</span>
                 <span class="font-display text-lg sm:text-xl whitespace-nowrap">@atlas.realty</span>
             </div>
-        </div>
-    </section>
-
-    <!-- ============ Portfólio (carrossel de vídeos) ============ -->
-    <section id="portfolio" class="scroll-mt-24 py-20 sm:py-28 bg-black border-t border-white/10 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5 sm:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
-                <span data-reveal class="eyebrow">Portfólio</span>
-                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
-                    Conteúdo bonito é o começo. Conteúdo que <span class="gold-text">converte</span> é o ponto.
-                </h2>
-            </div>
-
-            <div data-reveal="scale" class="relative mx-auto max-w-3xl">
-                <div id="portfolio-stage" class="portfolio-stage"></div>
-                <button id="portfolio-prev" class="portfolio-arrow portfolio-arrow-prev" aria-label="Vídeo anterior">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-                </button>
-                <button id="portfolio-next" class="portfolio-arrow portfolio-arrow-next" aria-label="Próximo vídeo">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
-            <div id="portfolio-dots" class="flex justify-center gap-2 mt-8"></div>
         </div>
     </section>
 
