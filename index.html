@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision | Agência Audiovisual Imobiliária</title>
+    <title>Vision | Agência Audiovisual para Imóveis de Alto Padrão</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,7 +28,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold-grad: linear-gradient(180deg, #F0D87C 0%, #D4AF37 50%, #9F7928 100%);
@@ -39,11 +39,7 @@
             background-color: #000;
             -webkit-font-smoothing: antialiased;
         }
-
-        /* ====== Tipografia display (moderna, geométrica) ====== */
-        .font-display {
-            font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-        }
+        .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; }
 
         .gold-text {
             background: linear-gradient(180deg, #F0D87C 0%, #D4AF37 45%, #9F7928 100%);
@@ -53,383 +49,216 @@
         }
         .gold-bg { background: var(--gold-grad); }
 
-        /* ====== Hero: vídeo de fundo (casa de luxo) ====== */
-        .hero-video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background:
-                linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.82)),
-                radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%);
-        }
-
         /* ====== Botões lozenge / pílula ====== */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 1;
-            padding: 14px 28px;
-            white-space: nowrap;
-            cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            border-radius: 9999px; font-weight: 500; font-size: 15px; line-height: 1;
+            padding: 14px 28px; white-space: nowrap; cursor: pointer;
             transition: transform 250ms ease, box-shadow 250ms ease,
                         background 250ms ease, color 250ms ease, border-color 250ms ease, filter 250ms ease;
         }
         .btn-gold { background: var(--gold-grad); color: #000; }
-        .btn-gold:hover {
-            filter: brightness(1.06);
-            transform: translateY(-1px);
-            box-shadow: 0 12px 32px -10px rgba(212, 175, 55, 0.55);
-        }
-        .btn-ghost {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-        }
-        .btn-ghost:hover {
-            border-color: #D4AF37;
-            color: #D4AF37;
-            transform: translateY(-1px);
-        }
+        .btn-gold:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 12px 32px -10px rgba(212, 175, 55, 0.55); }
+        .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.35); }
+        .btn-ghost:hover { border-color: #D4AF37; color: #D4AF37; transform: translateY(-1px); }
 
-        /* ====== Badge lozenge ====== */
+        /* ====== Badge + eyebrow ====== */
         .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 9999px;
-            padding: 8px 16px;
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            background: rgba(212, 175, 55, 0.10);
-            border: 1px solid rgba(212, 175, 55, 0.28);
-            color: #F0D87C;
+            display: inline-flex; align-items: center; gap: 8px;
+            border-radius: 9999px; padding: 8px 16px;
+            font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+            background: rgba(212, 175, 55, 0.10); border: 1px solid rgba(212, 175, 55, 0.28); color: #F0D87C;
         }
-        .badge .dot {
-            width: 6px; height: 6px; border-radius: 9999px;
-            background: #D4AF37;
-        }
+        .badge .dot { width: 6px; height: 6px; border-radius: 9999px; background: #D4AF37; }
+        .eyebrow { display: inline-block; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #D4AF37; font-weight: 500; }
 
-        /* ====== Eyebrow (rótulo de seção) ====== */
-        .eyebrow {
-            display: inline-block;
-            font-size: 12px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: #D4AF37;
-            font-weight: 500;
+        /* ====== Reveal on scroll ====== */
+        @media (prefers-reduced-motion: no-preference) {
+            [data-reveal] {
+                opacity: 0; transform: translateY(30px);
+                transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+                transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform;
+            }
+            [data-reveal].is-visible { opacity: 1; transform: none; }
+            [data-reveal="scale"] { transform: scale(0.96); }
+            [data-reveal="scale"].is-visible { transform: none; }
         }
+        .lift { transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), border-color 400ms ease, background 400ms ease; }
+        .lift:hover { transform: translateY(-4px); }
+
+        /* ====== Marquee (prova social / parceiros) ====== */
+        .marquee-mask {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        }
+        .marquee { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+        .marquee:hover { animation-play-state: paused; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ====== FAQ ====== */
+        details.faq { border-bottom: 1px solid rgba(255,255,255,0.10); }
+        details.faq summary { list-style: none; cursor: pointer; outline: none; }
+        details.faq summary::-webkit-details-marker { display: none; }
+        .faq-icon { transition: transform 300ms ease; }
+        details.faq[open] .faq-icon { transform: rotate(45deg); }
+        .faq-body { overflow: hidden; }
+
+        /* ====== Case study graph bars ====== */
+        .case-bar-fill { width: 0; transition: width 1300ms cubic-bezier(0.16, 1, 0.3, 1); }
+        [data-reveal].is-visible .case-bar-fill { width: var(--w, 0%); }
 
         /* ====== Portfolio Carousel ====== */
-        .portfolio-stage {
-            position: relative;
-            height: 440px;
-        }
-        @media (min-width: 640px) {
-            .portfolio-stage { height: 560px; }
-        }
-
+        .portfolio-stage { position: relative; height: 440px; }
+        @media (min-width: 640px) { .portfolio-stage { height: 560px; } }
         .portfolio-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 220px;
-            aspect-ratio: 9 / 16;
+            position: absolute; top: 50%; left: 50%; width: 220px; aspect-ratio: 9 / 16;
             transform: translate(-50%, -50%);
-            transition:
-                transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 600ms ease,
-                filter 600ms ease,
-                box-shadow 600ms ease;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #050505;
-            will-change: transform, opacity, filter;
+            transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms ease, filter 600ms ease, box-shadow 600ms ease;
+            border-radius: 10px; overflow: hidden; background: #050505; will-change: transform, opacity, filter;
         }
-        @media (min-width: 640px) {
-            .portfolio-card { width: 280px; }
-        }
+        @media (min-width: 640px) { .portfolio-card { width: 280px; } }
+        .portfolio-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .portfolio-card video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ====== Mute / Unmute button (sobre o vídeo em destaque) ====== */
         .portfolio-mute {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 6;
-            width: 38px;
-            height: 38px;
-            border-radius: 9999px;
-            background: rgba(0, 0, 0, 0.55);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            color: #D4AF37;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition:
-                opacity 350ms ease,
-                background 250ms ease,
-                color 250ms ease,
-                transform 200ms ease,
-                box-shadow 250ms ease;
+            position: absolute; top: 10px; right: 10px; z-index: 6;
+            width: 38px; height: 38px; border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.45); color: #D4AF37;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0;
+            transition: opacity 350ms ease, background 250ms ease, color 250ms ease, transform 200ms ease, box-shadow 250ms ease;
         }
-        @media (min-width: 640px) {
-            .portfolio-mute { top: 12px; right: 12px; width: 42px; height: 42px; }
-        }
-        /* só aparece e é clicável no card em destaque */
+        @media (min-width: 640px) { .portfolio-mute { top: 12px; right: 12px; width: 42px; height: 42px; } }
         .portfolio-card.pc-current .portfolio-mute { opacity: 1; }
         .portfolio-card:not(.pc-current) .portfolio-mute { pointer-events: none; }
-        .portfolio-mute:hover {
-            background: linear-gradient(180deg, #F0D87C 0%, #D4AF37 50%, #9F7928 100%);
-            color: #000;
-            border-color: rgba(212, 175, 55, 1);
-            transform: scale(1.08);
-            box-shadow: 0 0 24px -6px rgba(212, 175, 55, 0.55);
-        }
+        .portfolio-mute:hover { background: var(--gold-grad); color: #000; border-color: rgba(212, 175, 55, 1); transform: scale(1.08); box-shadow: 0 0 24px -6px rgba(212, 175, 55, 0.55); }
         .portfolio-mute:active { transform: scale(0.92); }
         .portfolio-mute svg { width: 19px; height: 19px; }
 
         .portfolio-card.pc-current {
-            transform: translate(-50%, -50%) scale(1.05);
-            opacity: 1;
-            filter: none;
-            z-index: 3;
-            box-shadow:
-                0 0 0 1px rgba(212, 175, 55, 0.55),
-                0 0 60px -10px rgba(212, 175, 55, 0.45),
-                0 20px 50px -15px rgba(0, 0, 0, 0.8);
+            transform: translate(-50%, -50%) scale(1.05); opacity: 1; filter: none; z-index: 3;
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.55), 0 0 60px -10px rgba(212, 175, 55, 0.45), 0 20px 50px -15px rgba(0, 0, 0, 0.8);
         }
-
-        .portfolio-card.pc-prev {
-            transform: translate(calc(-50% - 145px), -50%) scale(0.72);
-            opacity: 0.35;
-            filter: blur(2px) saturate(0.6);
-            z-index: 2;
-        }
-        .portfolio-card.pc-next {
-            transform: translate(calc(-50% + 145px), -50%) scale(0.72);
-            opacity: 0.35;
-            filter: blur(2px) saturate(0.6);
-            z-index: 2;
-        }
+        .portfolio-card.pc-prev { transform: translate(calc(-50% - 145px), -50%) scale(0.72); opacity: 0.35; filter: blur(2px) saturate(0.6); z-index: 2; }
+        .portfolio-card.pc-next { transform: translate(calc(-50% + 145px), -50%) scale(0.72); opacity: 0.35; filter: blur(2px) saturate(0.6); z-index: 2; }
         @media (min-width: 640px) {
             .portfolio-card.pc-prev { transform: translate(calc(-50% - 210px), -50%) scale(0.75); }
             .portfolio-card.pc-next { transform: translate(calc(-50% + 210px), -50%) scale(0.75); }
         }
-
-        .portfolio-card.pc-far-left {
-            transform: translate(calc(-50% - 400px), -50%) scale(0.5);
-            opacity: 0;
-            filter: blur(4px);
-            z-index: 1;
-            pointer-events: none;
-        }
-        .portfolio-card.pc-far-right {
-            transform: translate(calc(-50% + 400px), -50%) scale(0.5);
-            opacity: 0;
-            filter: blur(4px);
-            z-index: 1;
-            pointer-events: none;
-        }
+        .portfolio-card.pc-far-left { transform: translate(calc(-50% - 400px), -50%) scale(0.5); opacity: 0; filter: blur(4px); z-index: 1; pointer-events: none; }
+        .portfolio-card.pc-far-right { transform: translate(calc(-50% + 400px), -50%) scale(0.5); opacity: 0; filter: blur(4px); z-index: 1; pointer-events: none; }
 
         .portfolio-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            width: 44px;
-            height: 44px;
-            border-radius: 9999px;
-            background: rgba(0, 0, 0, 0.55);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            color: #D4AF37;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition:
-                background 250ms ease,
-                color 250ms ease,
-                border-color 250ms ease,
-                transform 250ms ease,
-                box-shadow 250ms ease;
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+            width: 44px; height: 44px; border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.35); color: #D4AF37;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: background 250ms ease, color 250ms ease, border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
         }
-        @media (min-width: 640px) {
-            .portfolio-arrow { width: 52px; height: 52px; }
-        }
-        .portfolio-arrow:hover {
-            background: linear-gradient(180deg, #F0D87C 0%, #D4AF37 50%, #9F7928 100%);
-            color: #000;
-            border-color: rgba(212, 175, 55, 1);
-            transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.55);
-        }
-        .portfolio-arrow:active {
-            transform: translateY(-50%) scale(0.94);
-        }
-        .portfolio-arrow svg {
-            width: 22px;
-            height: 22px;
-        }
-        .portfolio-arrow-prev { left: 4px; }
-        .portfolio-arrow-next { right: 4px; }
-        @media (min-width: 640px) {
-            .portfolio-arrow-prev { left: 16px; }
-            .portfolio-arrow-next { right: 16px; }
-        }
+        @media (min-width: 640px) { .portfolio-arrow { width: 52px; height: 52px; } }
+        .portfolio-arrow:hover { background: var(--gold-grad); color: #000; border-color: rgba(212, 175, 55, 1); transform: translateY(-50%) scale(1.08); box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.55); }
+        .portfolio-arrow:active { transform: translateY(-50%) scale(0.94); }
+        .portfolio-arrow svg { width: 22px; height: 22px; }
+        .portfolio-arrow-prev { left: 4px; } .portfolio-arrow-next { right: 4px; }
+        @media (min-width: 640px) { .portfolio-arrow-prev { left: 16px; } .portfolio-arrow-next { right: 16px; } }
 
-        /* ====== Hero scroll hint ====== */
-        @keyframes scrollHint {
-            0%, 100% { transform: translate(-50%, 0);   opacity: 0.5; }
-            50%      { transform: translate(-50%, 8px); opacity: 1;   }
+        /* ====== Hero glow + scroll hint ====== */
+        .hero-glow {
+            position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%);
+            width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
+            background: radial-gradient(circle, rgba(212,175,55,0.16) 0%, rgba(212,175,55,0.05) 35%, transparent 70%);
+            pointer-events: none; filter: blur(10px);
         }
-        .scroll-hint {
-            animation: scrollHint 2.2s ease-in-out infinite;
-        }
+        @keyframes scrollHint { 0%,100% { transform: translate(-50%, 0); opacity: 0.5; } 50% { transform: translate(-50%, 8px); opacity: 1; } }
+        .scroll-hint { animation: scrollHint 2.2s ease-in-out infinite; }
 
-        /* ====== Reveal on scroll (estilo Sequel) ====== */
-        @media (prefers-reduced-motion: no-preference) {
-            [data-reveal] {
-                opacity: 0;
-                transform: translateY(30px);
-                transition:
-                    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-                transition-delay: var(--reveal-delay, 0ms);
-                will-change: opacity, transform;
-            }
-            [data-reveal].is-visible {
-                opacity: 1;
-                transform: none;
-            }
-            /* variantes de direção */
-            [data-reveal="left"]  { transform: translateX(-30px); }
-            [data-reveal="right"] { transform: translateX(30px); }
-            [data-reveal="scale"] { transform: scale(0.96); }
-            [data-reveal="left"].is-visible,
-            [data-reveal="right"].is-visible,
-            [data-reveal="scale"].is-visible { transform: none; }
-        }
-
-        /* hover lift nos cards de serviço */
-        .lift { transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), background 400ms ease; }
-        .lift:hover { transform: translateY(-4px); }
+        /* ====== Menu hambúrguer (vira X) ====== */
+        #menu-toggle .menu-line:nth-child(1) { transform-origin: center; }
+        #menu-toggle .menu-line:nth-child(2) { transform-origin: center; }
+        #menu-toggle.is-open .menu-line:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+        #menu-toggle.is-open .menu-line:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+        #mobile-menu.is-open { opacity: 1; pointer-events: auto; }
     </style>
 </head>
 <body class="bg-black text-gray-200">
 
-    <!-- ============ Navbar (minimalista, fixa) ============ -->
-    <header class="fixed top-0 inset-x-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10">
+    <!-- ============ Navbar ============ -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
         <nav class="max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
             <a href="#top" class="flex items-center" aria-label="Vision — início">
-                <img src="assets/vision-logo.jpg" alt="Vision" class="h-8 sm:h-9 w-auto rounded-md">
+                <span style="font-family: 'Archivo', sans-serif;" class="gold-text font-black lowercase leading-none tracking-tight text-2xl sm:text-3xl">vision</span>
             </a>
-            <div class="hidden md:flex items-center gap-9 text-sm text-gray-300">
-                <a href="#portfolio" class="hover:text-white transition-colors">Portfólio</a>
-                <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
-                <a href="#processo" class="hover:text-white transition-colors">Processo</a>
-            </div>
-            <a href="#contato" class="btn btn-gold !py-2.5 !px-5 text-sm">Fale conosco</a>
+
+            <!-- Botão hambúrguer -->
+            <button id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu"
+                    class="relative z-50 flex flex-col justify-center items-center gap-1.5 w-10 h-10 text-white">
+                <span class="menu-line block w-6 h-0.5 bg-current transition-all duration-300"></span>
+                <span class="menu-line block w-6 h-0.5 bg-current transition-all duration-300"></span>
+            </button>
         </nav>
+
+        <!-- Menu overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-center items-center gap-8">
+            <a href="#servicos" data-menu-link class="font-display text-3xl sm:text-4xl text-gray-200 hover:text-gold transition-colors">Serviços</a>
+            <a href="#portfolio" data-menu-link class="font-display text-3xl sm:text-4xl text-gray-200 hover:text-gold transition-colors">Portfólio</a>
+            <a href="#cases" data-menu-link class="font-display text-3xl sm:text-4xl text-gray-200 hover:text-gold transition-colors">Cases</a>
+            <a href="#sobre" data-menu-link class="font-display text-3xl sm:text-4xl text-gray-200 hover:text-gold transition-colors">Sobre</a>
+            <a href="#faq" data-menu-link class="font-display text-3xl sm:text-4xl text-gray-200 hover:text-gold transition-colors">FAQ</a>
+            <a href="#contato" data-menu-link class="btn btn-gold mt-4">Fale conosco</a>
+        </div>
     </header>
 
-    <!-- ============ Hero ============ -->
-    <section id="top" class="relative flex flex-col items-center justify-center text-center px-5 overflow-hidden bg-black" style="min-height: 100vh; min-height: 100svh;">
-        <!-- Vídeo de fundo: drone orbitando uma casa de luxo (loop, sem som) -->
-        <video class="hero-video" autoplay muted loop playsinline preload="auto">
-            <source src="assets/videos/hero-drone.mp4" type="video/mp4">
+    <!-- ============ Hero (estilo editorial — imagem full-bleed + legendas) ============ -->
+    <section id="top" class="relative flex flex-col overflow-hidden bg-black" style="min-height: 100vh; min-height: 100svh;">
+
+        <!-- Vídeo de fundo — drone em órbita (loop, mudo). Poster aparece enquanto carrega / fallback. -->
+        <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline
+               poster="assets/videos/hero-orbit-poster.jpg">
+            <source src="assets/videos/hero-orbit.mp4" type="video/mp4">
         </video>
-        <div class="hero-overlay"></div>
 
-        <div class="absolute inset-x-0 top-1/3 h-80 bg-gold/15 blur-3xl pointer-events-none z-[2]"></div>
+        <!-- Overlays para legibilidade -->
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.92) 100%);"></div>
+        <!-- Degradê do cabeçalho descendo até o h1 -->
+        <div class="absolute inset-x-0 top-0 h-72 sm:h-80" style="background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);"></div>
 
-        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-            <span data-reveal class="badge mb-7 sm:mb-8"><span class="dot"></span>Agência audiovisual • Mercado imobiliário</span>
+        <!-- Conteúdo — ancorado na base, alinhado à esquerda -->
+        <div class="relative z-10 flex-1 flex flex-col justify-end px-6 sm:px-10 lg:px-16 pt-24 pb-6">
+            <div class="max-w-2xl text-left">
+                <h1 data-reveal style="--reveal-delay: 100ms; font-size: clamp(2.5rem, 10vw, 6.5rem); line-height: 0.95; letter-spacing: -0.03em;" class="font-display text-white font-medium">
+                    Imóveis que<br>vendem pela <span class="gold-text">imagem</span>.
+                </h1>
 
-            <h1 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2.75rem, 8vw, 7rem); line-height: 0.98; letter-spacing: -0.025em;" class="font-display text-white font-medium tracking-tight">
-                Transformamos imóveis<br>em <span class="font-display gold-text">vendas</span>.
-            </h1>
-
-            <p data-reveal style="--reveal-delay: 260ms;" class="mt-7 sm:mt-8 text-base sm:text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
-                Produções audiovisuais que valorizam imóveis e aceleram vendas — da captação cinematográfica ao tráfego que encontra o comprador certo.
-            </p>
-
-            <div data-reveal style="--reveal-delay: 400ms;" class="mt-9 sm:mt-10 flex flex-col sm:flex-row items-center gap-3">
-                <a href="#portfolio" class="btn btn-gold w-full sm:w-auto">Ver portfólio</a>
-                <a href="#contato" class="btn btn-ghost w-full sm:w-auto">Falar com a gente</a>
+                <p data-reveal style="--reveal-delay: 240ms;" class="mt-5 text-xs sm:text-sm text-gray-300 max-w-md leading-relaxed">
+                    Transformamos arquitetura em desejo — e cada detalhe no motivo certo para dizer sim.
+                </p>
             </div>
         </div>
 
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-10 sm:bottom-14 left-1/2 z-10 scroll-hint flex flex-col items-center gap-2 text-gray-400 pointer-events-none">
-            <span class="text-[10px] sm:text-xs uppercase tracking-[0.3em]">Role para conhecer</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- ============ Portfolio (carrossel de vídeos) ============ -->
-    <section id="portfolio" class="scroll-mt-24 py-20 sm:py-28 bg-black border-t border-white/10 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-5 sm:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
-                <span data-reveal class="eyebrow">Portfólio</span>
-                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
-                    Projetos que já colocamos em <span class="font-display gold-text">movimento</span>.
-                </h2>
+        <!-- Legendas (estilo editorial) — base da hero -->
+        <div class="relative z-10 px-6 sm:px-10 lg:px-16 pb-8">
+            <div data-reveal style="--reveal-delay: 520ms;" class="flex items-end justify-between gap-4 border-t border-white/15 pt-5">
+                <!-- Legenda esquerda: detalhe do imóvel em destaque (TODO: editar) -->
+                <div class="text-gray-300">
+                    <p class="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-gold">Imóvel em destaque</p>
+                    <p class="mt-1.5 text-sm sm:text-base text-white">Residência Alphaville · 720 m²</p>
+                </div>
+                <!-- Legenda direita: serviços -->
+                <div class="hidden sm:flex flex-wrap justify-end gap-x-3 gap-y-1 text-xs text-gray-400 uppercase tracking-[0.2em] max-w-xs text-right">
+                    <span>Vídeo</span><span class="text-gold/50">•</span>
+                    <span>Foto</span><span class="text-gold/50">•</span>
+                    <span>Tráfego</span><span class="text-gold/50">•</span>
+                    <span>Marca pessoal</span>
+                </div>
             </div>
-
-            <div data-reveal="scale" class="relative mx-auto max-w-3xl">
-                <div id="portfolio-stage" class="portfolio-stage"></div>
-
-                <button id="portfolio-prev" class="portfolio-arrow portfolio-arrow-prev" aria-label="Vídeo anterior">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <button id="portfolio-next" class="portfolio-arrow portfolio-arrow-next" aria-label="Próximo vídeo">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div id="portfolio-dots" class="flex justify-center gap-2 mt-8"></div>
         </div>
-    </section>
 
-    <!-- ============ Manifesto ============ -->
-    <section class="py-20 sm:py-28 border-t border-white/10">
-        <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
-            <p data-reveal class="font-display text-white" style="font-size: clamp(1.6rem, 4.5vw, 3rem); line-height: 1.18; letter-spacing: -0.02em;">
-                Cada imóvel tem uma história.<br class="hidden sm:block">
-                Nós a contamos em vídeo — com a estética que <span class="font-display gold-text">valoriza</span> e a estratégia que <span class="font-display gold-text">vende</span>.
-            </p>
+        <!-- Scroll hint -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 scroll-hint flex flex-col items-center gap-1.5 text-gray-400 pointer-events-none">
+            <span class="text-[10px] uppercase tracking-[0.3em]">Role</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
         </div>
     </section>
 
@@ -437,94 +266,363 @@
     <section id="servicos" class="scroll-mt-24 py-20 sm:py-28 border-t border-white/10">
         <div class="max-w-6xl mx-auto px-5 sm:px-8">
             <div class="max-w-2xl mb-14 sm:mb-20">
-                <span data-reveal class="eyebrow">O que fazemos</span>
+                <span data-reveal class="eyebrow">O que oferecemos</span>
                 <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
-                    Tudo que um imóvel precisa para <span class="font-display gold-text">vender</span>.
+                    Tudo que sua marca e seu imóvel precisam para <span class="gold-text">vender</span>.
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-[10px] overflow-hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-[10px] overflow-hidden">
                 <!-- 01 -->
-                <div data-reveal class="lift bg-black p-8 sm:p-10 flex flex-col gap-5">
+                <div data-reveal class="lift bg-black p-8 flex flex-col gap-5">
                     <div class="flex items-center justify-between">
                         <span class="font-display text-gold/70 text-2xl">01</span>
                         <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-white text-xl font-medium">Qualidade Cinematográfica</h3>
-                    <p class="text-gray-400 leading-relaxed">Captação de imagens que valorizam os melhores ângulos e detalhes do imóvel.</p>
+                    <h3 class="text-white text-lg font-medium">Captação</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Filmagem cinematográfica que valoriza cada ambiente e detalhe do imóvel.</p>
                 </div>
                 <!-- 02 -->
-                <div data-reveal style="--reveal-delay: 130ms;" class="lift bg-black p-8 sm:p-10 flex flex-col gap-5">
+                <div data-reveal style="--reveal-delay: 100ms;" class="lift bg-black p-8 flex flex-col gap-5">
                     <div class="flex items-center justify-between">
                         <span class="font-display text-gold/70 text-2xl">02</span>
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-white text-xl font-medium">Tráfego Estratégico</h3>
-                    <p class="text-gray-400 leading-relaxed">Distribuição inteligente para alcançar pessoas que realmente estão buscando comprar.</p>
+                    <h3 class="text-white text-lg font-medium">Edição de vídeo</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Cortes dinâmicos, ritmo e trilha que prendem a atenção do início ao fim.</p>
                 </div>
                 <!-- 03 -->
-                <div data-reveal style="--reveal-delay: 260ms;" class="lift bg-black p-8 sm:p-10 flex flex-col gap-5">
+                <div data-reveal style="--reveal-delay: 200ms;" class="lift bg-black p-8 flex flex-col gap-5">
                     <div class="flex items-center justify-between">
                         <span class="font-display text-gold/70 text-2xl">03</span>
                         <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     </div>
-                    <h3 class="text-white text-xl font-medium">Apresentação Profissional</h3>
-                    <p class="text-gray-400 leading-relaxed">Roteiro persuasivo com apresentadora para gerar autoridade e confiança imediata.</p>
+                    <h3 class="text-white text-lg font-medium">Criação de marca pessoal</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Posicionamento e conteúdo que transformam o corretor em autoridade.</p>
+                </div>
+                <!-- 04 -->
+                <div data-reveal style="--reveal-delay: 300ms;" class="lift bg-black p-8 flex flex-col gap-5">
+                    <div class="flex items-center justify-between">
+                        <span class="font-display text-gold/70 text-2xl">04</span>
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h3 class="text-white text-lg font-medium">Tráfego pago</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Anúncios que colocam seu imóvel na frente de quem está pronto para comprar.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============ Processo ============ -->
-    <section id="processo" class="scroll-mt-24 py-20 sm:py-28 border-t border-white/10 bg-zinc-950/40">
+    <!-- ============ Prova social (onde você já nos viu) ============ -->
+    <section class="py-14 sm:py-16 border-t border-white/10">
         <div class="max-w-6xl mx-auto px-5 sm:px-8">
-            <div class="max-w-2xl mb-14 sm:mb-20">
-                <span data-reveal class="eyebrow">Como trabalhamos</span>
+            <p data-reveal class="text-center text-gray-500 text-sm uppercase tracking-[0.25em] mb-10">Você provavelmente já nos viu por aqui</p>
+        </div>
+        <!-- dados de exemplo — EDITAR com handles/perfis reais -->
+        <div class="marquee-mask">
+            <div class="marquee gap-12 sm:gap-16 pr-12 sm:pr-16 text-gray-400">
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@imobiliaria.aurora</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@corretor.lumiere</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@pinnacle.imoveis</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@vertice.alto.padrao</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@solar.residencial</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@atlas.realty</span>
+                <!-- duplicado para loop contínuo -->
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@imobiliaria.aurora</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@corretor.lumiere</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@pinnacle.imoveis</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@vertice.alto.padrao</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@solar.residencial</span>
+                <span class="font-display text-lg sm:text-xl whitespace-nowrap">@atlas.realty</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Portfólio (carrossel de vídeos) ============ -->
+    <section id="portfolio" class="scroll-mt-24 py-20 sm:py-28 bg-black border-t border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
+                <span data-reveal class="eyebrow">Portfólio</span>
                 <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
-                    Do briefing à <span class="font-display gold-text">venda</span>, em quatro etapas.
+                    Conteúdo bonito é o começo. Conteúdo que <span class="gold-text">converte</span> é o ponto.
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
-                <div data-reveal class="flex flex-col gap-4 pt-6 border-t border-gold/30">
-                    <span class="font-display text-gold text-3xl">01</span>
-                    <h3 class="text-white text-lg font-medium">Briefing</h3>
-                    <p class="text-gray-400 leading-relaxed">Entendemos o imóvel, o público-alvo e o objetivo de venda.</p>
+            <div data-reveal="scale" class="relative mx-auto max-w-3xl">
+                <div id="portfolio-stage" class="portfolio-stage"></div>
+                <button id="portfolio-prev" class="portfolio-arrow portfolio-arrow-prev" aria-label="Vídeo anterior">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button id="portfolio-next" class="portfolio-arrow portfolio-arrow-next" aria-label="Próximo vídeo">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            <div id="portfolio-dots" class="flex justify-center gap-2 mt-8"></div>
+        </div>
+    </section>
+
+    <!-- ============ Cases de sucesso ============ -->
+    <section id="cases" class="scroll-mt-24 py-20 sm:py-28 border-t border-white/10 bg-zinc-950/40">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mb-14 sm:mb-20">
+                <span data-reveal class="eyebrow">Cases de sucesso</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    Resultados que <span class="gold-text">falam</span> por si.
+                </h2>
+            </div>
+
+            <!-- dados de exemplo — EDITAR com cases reais -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Case 1 -->
+                <div data-reveal class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5 lift hover:border-gold/40">
+                    <div>
+                        <h3 class="text-white text-lg font-medium">Imobiliária Aurora</h3>
+                        <p class="text-gray-500 text-sm">Alto padrão · São Paulo, SP</p>
+                    </div>
+                    <div class="font-display text-4xl gold-text">+320%</div>
+                    <p class="text-gray-400 text-sm">de alcance orgânico em 90 dias com vídeos verticais e cortes diários.</p>
+                    <div class="mt-auto pt-4 space-y-2">
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 88%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 64%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 95%;"></div></div>
+                    </div>
                 </div>
-                <div data-reveal style="--reveal-delay: 110ms;" class="flex flex-col gap-4 pt-6 border-t border-gold/30">
-                    <span class="font-display text-gold text-3xl">02</span>
-                    <h3 class="text-white text-lg font-medium">Captação</h3>
-                    <p class="text-gray-400 leading-relaxed">Filmagem cinematográfica que destaca cada ambiente do imóvel.</p>
+                <!-- Case 2 -->
+                <div data-reveal style="--reveal-delay: 120ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5 lift hover:border-gold/40">
+                    <div>
+                        <h3 class="text-white text-lg font-medium">Corretor Lumière</h3>
+                        <p class="text-gray-500 text-sm">Marca pessoal · Balneário Camboriú, SC</p>
+                    </div>
+                    <div class="font-display text-4xl gold-text">+18 mil</div>
+                    <p class="text-gray-400 text-sm">novos seguidores qualificados em 4 meses e 7 imóveis vendidos via Instagram.</p>
+                    <div class="mt-auto pt-4 space-y-2">
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 55%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 78%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 92%;"></div></div>
+                    </div>
                 </div>
-                <div data-reveal style="--reveal-delay: 220ms;" class="flex flex-col gap-4 pt-6 border-t border-gold/30">
-                    <span class="font-display text-gold text-3xl">03</span>
-                    <h3 class="text-white text-lg font-medium">Edição</h3>
-                    <p class="text-gray-400 leading-relaxed">Cortes dinâmicos, ritmo e trilha que prendem a atenção do início ao fim.</p>
+                <!-- Case 3 -->
+                <div data-reveal style="--reveal-delay: 240ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5 lift hover:border-gold/40">
+                    <div>
+                        <h3 class="text-white text-lg font-medium">Pinnacle Imóveis</h3>
+                        <p class="text-gray-500 text-sm">Lançamento · Goiânia, GO</p>
+                    </div>
+                    <div class="font-display text-4xl gold-text">100%</div>
+                    <p class="text-gray-400 text-sm">das unidades vendidas antes da entrega, com campanha de tráfego pago dedicada.</p>
+                    <div class="mt-auto pt-4 space-y-2">
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 70%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 85%;"></div></div>
+                        <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="case-bar-fill h-full gold-bg" style="--w: 100%;"></div></div>
+                    </div>
                 </div>
-                <div data-reveal style="--reveal-delay: 330ms;" class="flex flex-col gap-4 pt-6 border-t border-gold/30">
-                    <span class="font-display text-gold text-3xl">04</span>
-                    <h3 class="text-white text-lg font-medium">Distribuição</h3>
-                    <p class="text-gray-400 leading-relaxed">Tráfego pago e estratégia para alcançar quem está pronto para comprar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ IA ============ -->
+    <section class="py-20 sm:py-28 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mb-14 sm:mb-20">
+                <span data-reveal class="eyebrow">Tecnologia</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    Potencializado por <span class="gold-text">IA</span>. Feito por gente.
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                <div data-reveal class="flex flex-col gap-3 pt-6 border-t border-gold/30">
+                    <h3 class="text-white font-medium">Staging com IA</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Ambientes vazios ganham vida com mobília e decoração virtuais.</p>
                 </div>
+                <div data-reveal style="--reveal-delay: 110ms;" class="flex flex-col gap-3 pt-6 border-t border-gold/30">
+                    <h3 class="text-white font-medium">Tours interativos</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Experiências imersivas que deixam o comprador explorar o imóvel.</p>
+                </div>
+                <div data-reveal style="--reveal-delay: 220ms;" class="flex flex-col gap-3 pt-6 border-t border-gold/30">
+                    <h3 class="text-white font-medium">Efeitos exclusivos</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Transições e assinaturas visuais que só a Vision entrega.</p>
+                </div>
+                <div data-reveal style="--reveal-delay: 330ms;" class="flex flex-col gap-3 pt-6 border-t border-gold/30">
+                    <h3 class="text-white font-medium">Vídeo & Foto</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Produção completa, do roteiro ao corte final, em qualidade de cinema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Parceiros ============ -->
+    <section class="py-16 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <p data-reveal class="text-center text-gray-500 text-sm uppercase tracking-[0.25em] mb-10">Marcas que confiam na Vision</p>
+            <!-- dados de exemplo — EDITAR com logos reais -->
+            <div data-reveal style="--reveal-delay: 120ms;" class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-70">
+                <span class="font-display text-xl text-gray-400">AURORA</span>
+                <span class="font-display text-xl text-gray-400">LUMIÈRE</span>
+                <span class="font-display text-xl text-gray-400">PINNACLE</span>
+                <span class="font-display text-xl text-gray-400">VÉRTICE</span>
+                <span class="font-display text-xl text-gray-400">SOLAR</span>
+                <span class="font-display text-xl text-gray-400">ATLAS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Sobre / equipe ============ -->
+    <section id="sobre" class="scroll-mt-24 py-20 sm:py-28 border-t border-white/10 bg-zinc-950/40">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+                <span data-reveal class="eyebrow">Nossa história</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    Começou com uma câmera.<br>Virou uma <span class="gold-text">agência</span>.
+                </h2>
+                <!-- texto de exemplo — EDITAR -->
+                <p data-reveal style="--reveal-delay: 220ms;" class="mt-6 text-gray-400 leading-relaxed">
+                    A Vision nasceu da obsessão por mostrar imóveis do jeito que eles merecem. Começamos gravando alguns apartamentos com uma câmera só — e a resposta foi imediata: imóveis vendendo mais rápido e por mais valor.
+                </p>
+                <p data-reveal style="--reveal-delay: 300ms;" class="mt-4 text-gray-400 leading-relaxed">
+                    Hoje somos um time de mais de 20 pessoas entre captação, edição, social media e tráfego, com uma missão clara: transformar conteúdo em um canal de vendas previsível para o mercado imobiliário de alto padrão.
+                </p>
+                <div data-reveal style="--reveal-delay: 380ms;" class="mt-10 flex gap-10">
+                    <div>
+                        <div class="font-display text-4xl text-white" data-count="20" data-prefix="+">+20</div>
+                        <div class="mt-1 text-xs text-gray-500 uppercase tracking-wider">No time</div>
+                    </div>
+                    <div>
+                        <div class="font-display text-4xl text-white" data-count="6" data-prefix="+">+6</div>
+                        <div class="mt-1 text-xs text-gray-500 uppercase tracking-wider">Anos de estrada</div>
+                    </div>
+                </div>
+            </div>
+            <div data-reveal="scale" class="rounded-[10px] border border-white/10 bg-gradient-to-br from-zinc-900 to-black aspect-[4/3] flex items-center justify-center">
+                <!-- placeholder de imagem/equipe — EDITAR -->
+                <span class="text-gray-600 text-sm">Foto da equipe (em breve)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Vagas (Careers) ============ -->
+    <section class="py-16 sm:py-20 border-t border-white/10">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8">
+            <div data-reveal class="rounded-[10px] border border-gold/30 bg-gradient-to-br from-gold/10 to-transparent p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+                <div>
+                    <h3 class="font-display text-2xl sm:text-3xl text-white">Quer fazer parte do time Vision?</h3>
+                    <p class="mt-2 text-gray-400">Estamos sempre de olho em talentos de captação, edição e mídia.</p>
+                </div>
+                <!-- TODO: link real de carreiras -->
+                <a href="#contato" class="btn btn-ghost shrink-0">Ver vagas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Depoimentos ============ -->
+    <section class="py-20 sm:py-28 border-t border-white/10 bg-zinc-950/40">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mb-14 sm:mb-20">
+                <span data-reveal class="eyebrow">Depoimentos</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    O que dizem <span class="gold-text">sobre a gente</span>.
+                </h2>
+            </div>
+
+            <!-- depoimentos de exemplo — EDITAR -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <figure data-reveal class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"Em duas semanas meu Instagram virou outro. Os vídeos têm cara de cinema e o telefone não para de tocar."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Mariana Alves</span><br><span class="text-gray-500 text-sm">Corretora · BC, SC</span></figcaption>
+                </figure>
+                <figure data-reveal style="--reveal-delay: 100ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"Profissionalismo do briefing à entrega. Cada vídeo veio com estratégia, não só beleza."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Rafael Monteiro</span><br><span class="text-gray-500 text-sm">Diretor · Imobiliária Aurora</span></figcaption>
+                </figure>
+                <figure data-reveal style="--reveal-delay: 200ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"O tráfego trouxe leads de verdade. Vendemos um apartamento de R$ 2,5M direto de um anúncio."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Carolina Dias</span><br><span class="text-gray-500 text-sm">Sócia · Pinnacle Imóveis</span></figcaption>
+                </figure>
+                <figure data-reveal class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"A criação de marca pessoal me posicionou como referência na cidade. Mudou meu jogo."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Thiago Nunes</span><br><span class="text-gray-500 text-sm">Corretor · Goiânia, GO</span></figcaption>
+                </figure>
+                <figure data-reveal style="--reveal-delay: 100ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"Equipe criativa e rápida. Os roteiros prendem do primeiro ao último segundo."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Patrícia Gomes</span><br><span class="text-gray-500 text-sm">Marketing · Vértice</span></figcaption>
+                </figure>
+                <figure data-reveal style="--reveal-delay: 200ms;" class="rounded-[10px] border border-white/10 bg-black p-7 flex flex-col gap-5">
+                    <blockquote class="text-gray-300 leading-relaxed">"Melhor investimento que fiz no ano. Conteúdo, autoridade e vendas no mesmo pacote."</blockquote>
+                    <figcaption class="mt-auto"><span class="text-white font-medium">Eduardo Lima</span><br><span class="text-gray-500 text-sm">Corretor · São Paulo, SP</span></figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="scroll-mt-24 py-20 sm:py-28 border-t border-white/10">
+        <div class="max-w-3xl mx-auto px-5 sm:px-8">
+            <div class="mb-12 sm:mb-16 text-center">
+                <span data-reveal class="eyebrow">Dúvidas frequentes</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white mt-4">
+                    Tudo que você precisa <span class="gold-text">saber</span>.
+                </h2>
+            </div>
+
+            <div data-reveal>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        O que diferencia a Vision?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Unimos produção audiovisual de alto nível com estratégia de marketing e tráfego. Não entregamos só vídeos bonitos — entregamos um sistema de vendas para o seu imóvel.</p></div>
+                </details>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        Em quanto tempo recebo os vídeos?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">O prazo padrão é de 7 a 10 dias úteis após a captação, dependendo do pacote e da quantidade de vídeos. Projetos urgentes podem ser acelerados.</p></div>
+                </details>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        Vocês fazem tráfego pago?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Sim. Criamos e gerenciamos campanhas no Meta e Google para colocar o seu imóvel na frente de quem realmente está procurando comprar.</p></div>
+                </details>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        Como a IA entra no processo?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Usamos IA para staging virtual, efeitos e agilidade na edição — sempre com curadoria humana. A tecnologia acelera; a criatividade continua sendo nossa.</p></div>
+                </details>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        Filmam imóveis na planta ou em obra?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Sim. Para lançamentos, combinamos captação do estágio atual com staging por IA e renders, mostrando o resultado final antes mesmo da entrega.</p></div>
+                </details>
+                <details class="faq py-5">
+                    <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
+                        Atendem em quais cidades?
+                        <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </summary>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Atendemos todo o Brasil. Para projetos fora da nossa base, organizamos a logística de captação conforme a necessidade do cliente.</p></div>
+                </details>
             </div>
         </div>
     </section>
 
     <!-- ============ CTA / Contato ============ -->
     <section id="contato" class="scroll-mt-24 relative py-24 sm:py-32 border-t border-white/10 overflow-hidden text-center">
-        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-72 bg-gold/10 blur-3xl pointer-events-none"></div>
-
+        <div class="hero-glow" style="top: 50%;"></div>
         <div class="relative max-w-3xl mx-auto px-5">
             <span data-reveal class="eyebrow">Vamos conversar</span>
             <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.025em;" class="font-display text-white mt-5">
-                Pronto para dar <span class="font-display gold-text">movimento</span> ao seu imóvel?
+                Pronto para o seu imóvel <span class="gold-text">vender mais rápido</span>?
             </h2>
             <p data-reveal style="--reveal-delay: 240ms;" class="mt-6 text-gray-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-                Conte pra gente o imóvel que você quer vender. Criamos a estratégia audiovisual ideal para acelerar a venda.
+                Conte pra gente o que você quer vender. Montamos a estratégia audiovisual ideal para acelerar a venda.
             </p>
-
-            <div data-reveal style="--reveal-delay: 360ms;" class="mt-9 sm:mt-10 flex flex-col sm:flex-row justify-center gap-3">
-                <!-- TODO: troque o número pelo WhatsApp real (formato: 55 + DDD + número) -->
+            <div data-reveal style="--reveal-delay: 360ms;" class="mt-9 flex flex-col sm:flex-row justify-center gap-3">
+                <!-- TODO: troque pelo WhatsApp real (55 + DDD + número) -->
                 <a href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener" class="btn btn-gold w-full sm:w-auto">Chamar no WhatsApp</a>
                 <!-- TODO: troque pelo e-mail real -->
                 <a href="mailto:contato@vision.com.br" class="btn btn-ghost w-full sm:w-auto">Enviar e-mail</a>
@@ -533,49 +631,109 @@
     </section>
 
     <!-- ============ Footer ============ -->
-    <footer class="border-t border-white/10 py-12">
-        <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-            <img src="assets/vision-logo.jpg" alt="Vision" class="h-10 w-auto rounded-md">
-            <p class="text-gray-500 text-sm order-3 sm:order-2">&copy; 2026 Vision. Todos os direitos reservados.</p>
-            <div class="flex items-center gap-5 order-2 sm:order-3">
-                <!-- TODO: troque pelo Instagram real -->
-                <a href="https://instagram.com/" target="_blank" rel="noopener" class="text-gray-400 hover:text-gold transition-colors" aria-label="Instagram">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.62c-3.15 0-3.52.01-4.76.07-.99.04-1.53.21-1.89.35-.47.18-.81.4-1.17.76-.36.36-.58.7-.76 1.17-.14.36-.31.9-.35 1.89-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.04.99.21 1.53.35 1.89.18.47.4.81.76 1.17.36.36.7.58 1.17.76.36.14.9.31 1.89.35 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.99-.04 1.53-.21 1.89-.35.47-.18.81-.4 1.17-.76.36-.36.58-.7.76-1.17.14-.36.31-.9.35-1.89.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.99-.21-1.53-.35-1.89a3.15 3.15 0 00-.76-1.17 3.15 3.15 0 00-1.17-.76c-.36-.14-.9-.31-1.89-.35-1.24-.06-1.61-.07-4.76-.07zm0 2.76a5.46 5.46 0 110 10.92 5.46 5.46 0 010-10.92zm0 9a3.54 3.54 0 100-7.08 3.54 3.54 0 000 7.08zm6.95-9.22a1.27 1.27 0 11-2.55 0 1.27 1.27 0 012.55 0z"/></svg>
-                </a>
+    <footer class="border-t border-white/10 py-14">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+                <div class="max-w-xs">
+                    <img src="assets/vision-logo.jpg" alt="Vision" class="h-10 w-auto rounded-md mb-4">
+                    <p class="text-gray-500 text-sm leading-relaxed">Agência audiovisual para imóveis de alto padrão. Conteúdo, marca e tráfego que vendem.</p>
+                </div>
+                <div class="flex gap-12 sm:gap-16">
+                    <div class="flex flex-col gap-3 text-sm">
+                        <span class="text-gray-600 uppercase tracking-wider text-xs mb-1">Navegação</span>
+                        <a href="#servicos" class="text-gray-400 hover:text-white transition-colors">Serviços</a>
+                        <a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfólio</a>
+                        <a href="#cases" class="text-gray-400 hover:text-white transition-colors">Cases</a>
+                        <a href="#sobre" class="text-gray-400 hover:text-white transition-colors">Sobre</a>
+                        <a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex flex-col gap-3 text-sm">
+                        <span class="text-gray-600 uppercase tracking-wider text-xs mb-1">Social</span>
+                        <!-- TODO: links sociais reais -->
+                        <a href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener" class="text-gray-400 hover:text-gold transition-colors">WhatsApp</a>
+                        <a href="https://instagram.com/" target="_blank" rel="noopener" class="text-gray-400 hover:text-gold transition-colors">Instagram</a>
+                        <a href="https://tiktok.com/" target="_blank" rel="noopener" class="text-gray-400 hover:text-gold transition-colors">TikTok</a>
+                    </div>
+                </div>
             </div>
+            <div class="mt-12 pt-6 border-t border-white/10 text-gray-600 text-sm">&copy; 2026 Vision. Todos os direitos reservados.</div>
         </div>
     </footer>
 
-    <!-- Reveal on scroll -->
+    <!-- ====== Scripts ====== -->
+    <!-- Reveal on scroll + contadores -->
     <script>
         (function () {
-            const els = document.querySelectorAll('[data-reveal]');
-            if (!els.length) return;
-
             const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduce || !('IntersectionObserver' in window)) {
-                els.forEach(el => el.classList.add('is-visible'));
-                return;
+
+            // Menu hambúrguer
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuToggle && mobileMenu) {
+                const setMenu = (open) => {
+                    menuToggle.classList.toggle('is-open', open);
+                    mobileMenu.classList.toggle('is-open', open);
+                    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+                    document.body.style.overflow = open ? 'hidden' : '';
+                };
+                menuToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('is-open')));
+                mobileMenu.querySelectorAll('[data-menu-link]').forEach(a => a.addEventListener('click', () => setMenu(false)));
+                document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
             }
 
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        io.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+            // Reveal
+            const els = document.querySelectorAll('[data-reveal]');
+            if (els.length) {
+                if (reduce || !('IntersectionObserver' in window)) {
+                    els.forEach(el => el.classList.add('is-visible'));
+                } else {
+                    const io = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+                        });
+                    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+                    els.forEach(el => io.observe(el));
+                }
+            }
 
-            els.forEach(el => io.observe(el));
+            // Contadores
+            const counters = document.querySelectorAll('[data-count]');
+            counters.forEach(el => {
+                const target = parseFloat(el.dataset.count) || 0;
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                el.dataset.final = prefix + target + suffix;
+            });
+            if (counters.length) {
+                if (reduce || !('IntersectionObserver' in window)) {
+                    counters.forEach(el => { el.textContent = el.dataset.final; });
+                } else {
+                    const cio = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            const el = entry.target; cio.unobserve(el);
+                            const target = parseFloat(el.dataset.count) || 0;
+                            const prefix = el.dataset.prefix || '';
+                            const suffix = el.dataset.suffix || '';
+                            const dur = 1600, start = performance.now();
+                            (function tick(now) {
+                                const p = Math.min(1, (now - start) / dur);
+                                const eased = 1 - Math.pow(1 - p, 3);
+                                el.textContent = prefix + Math.round(target * eased) + suffix;
+                                if (p < 1) requestAnimationFrame(tick);
+                            })(start);
+                        });
+                    }, { threshold: 0.4 });
+                    counters.forEach(el => cio.observe(el));
+                }
+            }
         })();
     </script>
 
     <!-- Portfolio: carrossel com previews laterais e setas de navegação -->
     <script>
         // === Edite aqui: cole os links dos seus vídeos de portfolio ===
-        // Pode ser URL externa (Cloudflare Stream, R2, Vimeo direct mp4) ou caminho local (ex: "assets/videos/imovel-01.mp4").
-        // Adicione/remova quantos quiser — previews e indicadores se ajustam sozinhos.
         const portfolioVideos = [
             "assets/videos/giullia-residenziale.mp4",
             "assets/videos/wilton-1.mp4",
@@ -596,7 +754,6 @@
             let isAnimating = false;
             let soundOn = false; // áudio começa desligado (autoplay exige mudo)
 
-            // Ícones de som (ligado / desligado)
             const ICON_ON =
                 '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
                 '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5L6 9H2v6h4l5 4V5z"/>' +
@@ -606,7 +763,6 @@
                 '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5L6 9H2v6h4l5 4V5z"/>' +
                 '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 9l-6 6M17 9l6 6"/></svg>';
 
-            // --- Build cards + dots ---
             const cards = portfolioVideos.map((url, i) => {
                 const card = document.createElement('div');
                 card.className = 'portfolio-card';
@@ -643,7 +799,6 @@
                 return card;
             });
 
-            // Aplica o estado de som ao vídeo atual e atualiza todos os ícones
             function applySound() {
                 cards.forEach((card, i) => {
                     const v = card.querySelector('video');
@@ -653,7 +808,6 @@
                 });
             }
 
-            // --- Slot resolver (returns 'current' | 'prev' | 'next' | 'far-left' | 'far-right') ---
             function slotFor(i) {
                 const diff = ((i - current) % len + len) % len;
                 if (diff === 0) return 'current';
@@ -680,7 +834,7 @@
                 cards.forEach((card, i) => {
                     const v = card.querySelector('video');
                     if (i === current) {
-                        v.muted = !soundOn; // mantém o som conforme escolha do usuário
+                        v.muted = !soundOn;
                         v.currentTime = 0;
                         v.play().catch(() => {});
                     } else {
@@ -691,34 +845,23 @@
                 });
             }
 
-            // --- Initial render (no transition flash) ---
-            cards.forEach((c, i) => {
-                c.style.transition = 'none';
-                setSlot(c, slotFor(i));
-            });
-            stage.offsetHeight; // force reflow
+            cards.forEach((c, i) => { c.style.transition = 'none'; setSlot(c, slotFor(i)); });
+            stage.offsetHeight;
             cards.forEach(c => { c.style.transition = ''; });
             updateDots();
             playOnlyCurrent();
 
-            // --- Navigation with wrap-around teleport ---
             function go(direction) {
                 if (isAnimating) return;
                 isAnimating = true;
-
-                // Teleport the card that's about to "wrap" to the far side without animation
-                // so it can slide in naturally from there.
                 if (len >= 3) {
-                    const wrapIdx = direction > 0
-                        ? (current + 2) % len           // future "next" — coming from prev side
-                        : (current - 2 + len) % len;   // future "prev" — coming from next side
+                    const wrapIdx = direction > 0 ? (current + 2) % len : (current - 2 + len) % len;
                     const wrapCard = cards[wrapIdx];
                     wrapCard.style.transition = 'none';
                     setSlot(wrapCard, direction > 0 ? 'far-right' : 'far-left');
-                    wrapCard.offsetHeight; // commit
+                    wrapCard.offsetHeight;
                     wrapCard.style.transition = '';
                 }
-
                 requestAnimationFrame(() => {
                     current = (current + direction + len) % len;
                     cards.forEach((c, i) => setSlot(c, slotFor(i)));
@@ -730,8 +873,6 @@
 
             if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
             if (nextBtn) nextBtn.addEventListener('click', () => go(1));
-
-            // Keyboard arrows (acessibilidade)
             document.addEventListener('keydown', e => {
                 if (e.key === 'ArrowLeft')  go(-1);
                 if (e.key === 'ArrowRight') go(1);
