@@ -236,8 +236,11 @@
         </div>
     </section>
 
+    <!-- Vão preto entre a hero e o portfólio (respiro antes da seção 2) -->
+    <div class="h-[38vh] bg-black" aria-hidden="true"></div>
+
     <!-- ============ Portfólio (carrossel de vídeos) ============ -->
-    <section id="portfolio" class="scroll-mt-24 py-20 sm:py-28 bg-black overflow-hidden">
+    <section id="portfolio" class="scroll-mt-24 pb-20 sm:pb-28 bg-black overflow-hidden">
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
             <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
                 <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white">
@@ -733,7 +736,7 @@
     <script>
         // === Edite aqui: cole os links dos seus vídeos de portfolio ===
         const portfolioVideos = [
-            "assets/videos/giullia-residenziale.mp4",
+            "assets/videos/giullia-opt.mp4",
             "assets/videos/wilton-1.mp4",
             "assets/videos/alpha-1.mp4",
             "assets/videos/alpha-4.mp4",
@@ -770,7 +773,7 @@
                 v.src = url;
                 v.muted = true;
                 v.playsInline = true;
-                v.preload = 'metadata';
+                v.preload = 'none'; // carrega só o atual e vizinhos (definido em playOnlyCurrent)
                 v.addEventListener('ended', () => {
                     if (parseInt(card.dataset.idx, 10) === current) go(1);
                 });
@@ -875,8 +878,13 @@
             }
 
             function playOnlyCurrent() {
+                const next = (current + 1) % len, prev = (current - 1 + len) % len;
                 cards.forEach((card, i) => {
                     const v = card.querySelector('video');
+                    const near = (i === current || i === next || i === prev);
+                    // carrega antecipadamente só os vizinhos; libera memória dos distantes
+                    if (near && v.preload !== 'auto') { v.preload = 'auto'; v.load(); }
+                    else if (!near && v.preload !== 'none') { v.preload = 'none'; }
                     if (i === current) {
                         v.muted = !soundOn;
                         v.currentTime = 0;
