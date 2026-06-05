@@ -215,8 +215,8 @@
         </video>
 
         <!-- Overlays para legibilidade -->
-        <div class="absolute inset-0 bg-black/30"></div>
-        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.92) 100%);"></div>
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.35) 78%, rgba(0,0,0,0.9) 100%);"></div>
         <!-- Degradê do cabeçalho descendo até o h1 -->
         <div class="absolute inset-x-0 top-0 h-72 sm:h-80" style="background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);"></div>
 
@@ -242,8 +242,8 @@
     <!-- ============ Portfólio (carrossel de vídeos) ============ -->
     <section id="portfolio" class="scroll-mt-24 pb-20 sm:pb-28 bg-black overflow-hidden">
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
-                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em;" class="font-display text-white">
+            <div class="text-center max-w-5xl mx-auto mb-14 sm:mb-20">
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(1.15rem, 4.7vw, 3.25rem); line-height: 1.1; letter-spacing: -0.01em;" class="font-display text-white whitespace-nowrap">
                     Você provavelmente já nos viu por aí...
                 </h2>
             </div>
@@ -691,8 +691,11 @@
                     header.style.webkitBackdropFilter = 'blur(' + blur + ')';
                 }
                 if (!reduce) {
-                    // h1 sobe mais rápido que o vídeo (parallax)
-                    if (heroTitle) heroTitle.style.transform = 'translateY(' + (-y * 0.35) + 'px)';
+                    // h1 sobe mais rápido que o vídeo (parallax) e some em fade
+                    if (heroTitle) {
+                        heroTitle.style.transform = 'translateY(' + (-y * 0.35) + 'px)';
+                        heroTitle.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.45)));
+                    }
                     if (heroVideo) heroVideo.style.transform = 'translateY(' + (y * 0.12) + 'px) scale(1.05)';
                 }
                 // "Role" some logo nos primeiros pixels
