@@ -157,30 +157,6 @@
         @keyframes scrollHint { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
         .scroll-hint { animation: scrollHint 2.2s ease-in-out infinite; }
 
-        /* ====== Serviços: cards com borda de gradiente girando ====== */
-        @property --gradient-angle {
-            syntax: '<angle>'; initial-value: 0deg; inherits: false;
-        }
-        .service-card {
-            --bg: #0a0a0a;            /* fundo do card */
-            --g1: #584827;            /* dourado escuro */
-            --g2: #c7a03c;            /* dourado */
-            --g3: #f9de90;            /* dourado claro (brilho) */
-            transform-origin: center center; will-change: transform;
-            border: 2px solid transparent;
-            border-radius: 20px;
-            background-image:
-                linear-gradient(var(--bg), var(--bg)),
-                conic-gradient(from var(--gradient-angle),
-                    var(--g1) 0%, var(--g2) 37%, var(--g3) 30%, var(--g2) 33%,
-                    var(--g1) 40%, var(--g1) 50%, var(--g2) 77%, var(--g3) 80%,
-                    var(--g2) 83%, var(--g1) 90%);
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            animation: borderRotate 5s linear infinite;
-        }
-        @keyframes borderRotate { to { --gradient-angle: 360deg; } }
-        @media (prefers-reduced-motion: reduce) { .service-card { animation: none; } }
 
         /* ====== Menu hambúrguer (vira X) ====== */
         #menu-toggle .menu-line:nth-child(1) { transform-origin: center; }
@@ -205,7 +181,7 @@
     <!-- ============ Navbar ============ -->
     <header id="site-header" class="fixed top-0 inset-x-0 z-50">
         <nav class="relative max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
-            <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Vision — início">
+            <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Vision início">
                 <span style="font-family: 'Archivo', sans-serif;" class="gold-text font-black lowercase leading-none tracking-tight text-2xl sm:text-3xl">vision</span>
             </a>
 
@@ -286,42 +262,86 @@
         </div>
     </section>
 
-    <!-- ============ Serviços (cards com scroll-jacking) ============ -->
-    <section id="servicos" class="relative min-h-[400vh] scroll-mt-24">
-        <div class="sticky top-0 h-screen w-full overflow-hidden bg-black flex flex-col items-center">
-            <div class="pt-24 sm:pt-28 px-6 text-center max-w-2xl mx-auto">
-                <span data-reveal class="eyebrow">O que oferecemos</span>
-                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(1.6rem, 4.5vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em;" class="font-display text-white mt-4">
-                    Tudo que sua marca e seu imóvel precisam para <span class="gold-text">vender</span>.
+    <!-- ============ Serviços (apresentação editorial) ============ -->
+    <section id="servicos" class="scroll-mt-24 py-20 sm:py-28 bg-black">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8">
+
+            <!-- Intro -->
+            <div class="max-w-3xl">
+                <span data-reveal class="eyebrow">O que fazemos</span>
+                <h2 data-reveal style="--reveal-delay: 120ms; font-size: clamp(2.2rem, 6vw, 4.25rem); line-height: 1.05; letter-spacing: -0.02em;" class="font-display text-white uppercase mt-7">
+                    Produção audiovisual, gestão de redes e marca pessoal de alto padrão
                 </h2>
+                <p data-reveal style="--reveal-delay: 220ms;" class="mt-8 text-gray-200 text-base sm:text-lg leading-relaxed">
+                    Nossa atuação vai além da comunicação. <strong class="text-white font-semibold">Entregamos direção, operação e inteligência de marketing</strong> para imóveis e corretores que precisam de resultados concretos.
+                </p>
+                <p data-reveal style="--reveal-delay: 320ms;" class="mt-7 text-sm uppercase tracking-[0.12em] text-gray-500">
+                    <strong class="text-white font-semibold">Somos 360</strong>, atuando de forma integrada em três frentes principais:
+                </p>
             </div>
-            <div class="flex-1 w-full max-w-3xl mx-auto px-6 relative flex items-center justify-center -translate-y-10 sm:-translate-y-16">
 
-                <!-- CARD 1: Produção Audiovisual (preto + borda dourada) -->
-                <div class="service-card absolute w-[95%] md:w-[600px] h-[90px] md:h-[110px] grid grid-cols-4 items-center z-[40] translate-y-[100vh] shadow-2xl">
-                    <h3 class="col-start-2 col-span-2 text-sm md:text-xl font-light text-white tracking-tight whitespace-nowrap">Produção Audiovisual</h3>
-                    <span class="col-start-4 flex justify-center text-sm md:text-lg text-zinc-500 font-light">01</span>
+            <!-- Três frentes (cards com checklist) -->
+            <div class="mt-14 sm:mt-20 grid gap-6 md:grid-cols-3">
+
+                <!-- 01 — Produção Audiovisual -->
+                <div data-reveal class="lift flex flex-col rounded-2xl border border-white/10 bg-[#0a0a0a] p-7 sm:p-8">
+                    <span class="eyebrow">Audiovisual</span>
+                    <h3 class="font-display text-white text-2xl sm:text-3xl leading-tight mt-4">Produção Audiovisual</h3>
+                    <p class="mt-4 text-gray-300 text-sm leading-relaxed">Nós dirigimos todo o vídeo. O corretor só se preocupa com qual roupa vai usar.</p>
+                    <ul class="mt-7 space-y-3.5 text-sm text-gray-200">
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Vídeos cinematográficos de imóveis</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Captação aérea com drone</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Tour imersivo / walkthrough</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Fotografia profissional</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Edição com ritmo e trilha</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Reels e conteúdo vertical</li>
+                    </ul>
+                    <div class="mt-auto pt-8 flex items-center justify-between">
+                        <a href="#contato" aria-label="Falar sobre Produção Audiovisual" class="w-11 h-11 rounded-full bg-gold text-black flex items-center justify-center transition-transform hover:scale-105"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                        <span class="flex items-center gap-2 text-xs text-gray-500"><span class="w-2 h-2 rounded-full bg-green-500"></span>Disponível</span>
+                    </div>
                 </div>
 
-                <!-- CARD 2: Gestão de Redes Sociais (preto + borda dourada) -->
-                <div class="service-card absolute w-[95%] md:w-[600px] h-[90px] md:h-[110px] grid grid-cols-4 items-center shadow-2xl z-[30] translate-y-[100vh]">
-                    <h3 class="col-start-2 col-span-2 text-sm md:text-xl font-light text-white tracking-tight whitespace-nowrap">Gestão de Redes Sociais</h3>
-                    <span class="col-start-4 flex justify-center text-sm md:text-lg text-zinc-500 font-light">02</span>
+                <!-- 02 — Gestão de Redes Sociais -->
+                <div data-reveal style="--reveal-delay: 100ms;" class="lift flex flex-col rounded-2xl border border-white/10 bg-[#0a0a0a] p-7 sm:p-8">
+                    <span class="eyebrow">Social</span>
+                    <h3 class="font-display text-white text-2xl sm:text-3xl leading-tight mt-4">Gestão de Redes Sociais</h3>
+                    <p class="mt-4 text-gray-300 text-sm leading-relaxed">Presença estratégica e constante que mantém sua marca viva, relevante e gerando oportunidades.</p>
+                    <ul class="mt-7 space-y-3.5 text-sm text-gray-200">
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Planejamento de conteúdo</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Calendário editorial</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Copywriting e legendas</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Design de feed e stories</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Gestão de comunidade</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Relatórios de performance</li>
+                    </ul>
+                    <div class="mt-auto pt-8 flex items-center justify-between">
+                        <a href="#contato" aria-label="Falar sobre Gestão de Redes Sociais" class="w-11 h-11 rounded-full bg-gold text-black flex items-center justify-center transition-transform hover:scale-105"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                        <span class="flex items-center gap-2 text-xs text-gray-500"><span class="w-2 h-2 rounded-full bg-green-500"></span>Disponível</span>
+                    </div>
                 </div>
 
-                <!-- CARD 3: Tráfego Pago (preto + borda dourada) -->
-                <div class="service-card absolute w-[95%] md:w-[600px] h-[90px] md:h-[110px] grid grid-cols-4 items-center z-[20] translate-y-[100vh] shadow-2xl">
-                    <h3 class="col-start-2 col-span-2 text-sm md:text-xl font-light text-white tracking-tight whitespace-nowrap">Tráfego Pago</h3>
-                    <span class="col-start-4 flex justify-center text-sm md:text-lg text-zinc-500 font-light">03</span>
-                </div>
-
-                <!-- CARD 4: Criação de Marca Pessoal (preto + borda dourada) -->
-                <div class="service-card absolute w-[95%] md:w-[600px] h-[90px] md:h-[110px] grid grid-cols-4 items-center shadow-2xl z-[10] translate-y-[100vh]">
-                    <h3 class="col-start-2 col-span-2 text-sm md:text-xl font-light text-white tracking-tight whitespace-nowrap">Criação de Marca Pessoal</h3>
-                    <span class="col-start-4 flex justify-center text-sm md:text-lg text-zinc-500 font-light">04</span>
+                <!-- 03 — Criação de Marca Pessoal -->
+                <div data-reveal style="--reveal-delay: 200ms;" class="lift flex flex-col rounded-2xl border border-white/10 bg-[#0a0a0a] p-7 sm:p-8">
+                    <span class="eyebrow">Marca Pessoal</span>
+                    <h3 class="font-display text-white text-2xl sm:text-3xl leading-tight mt-4">Criação de Marca Pessoal</h3>
+                    <p class="mt-4 text-gray-300 text-sm leading-relaxed">Posicionamento e conteúdo que transformam o corretor em autoridade e referência no alto padrão.</p>
+                    <ul class="mt-7 space-y-3.5 text-sm text-gray-200">
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Posicionamento e identidade</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Direção de conteúdo</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Storytelling pessoal</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Gravação de bastidores</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Roteiros para câmera</li>
+                        <li class="flex items-center gap-3"><svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Autoridade e prova social</li>
+                    </ul>
+                    <div class="mt-auto pt-8 flex items-center justify-between">
+                        <a href="#contato" aria-label="Falar sobre Criação de Marca Pessoal" class="w-11 h-11 rounded-full bg-gold text-black flex items-center justify-center transition-transform hover:scale-105"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                        <span class="flex items-center gap-2 text-xs text-gray-500"><span class="w-2 h-2 rounded-full bg-green-500"></span>Disponível</span>
+                    </div>
                 </div>
 
             </div>
+
         </div>
     </section>
 
@@ -465,7 +485,7 @@
                 </h2>
                 <!-- texto de exemplo — EDITAR -->
                 <p data-reveal style="--reveal-delay: 220ms;" class="mt-6 text-gray-400 leading-relaxed">
-                    A Vision nasceu da obsessão por mostrar imóveis do jeito que eles merecem. Começamos gravando alguns apartamentos com uma câmera só — e a resposta foi imediata: imóveis vendendo mais rápido e por mais valor.
+                    A Vision nasceu da obsessão por mostrar imóveis do jeito que eles merecem. Começamos gravando alguns apartamentos com uma câmera só, e a resposta foi imediata: imóveis vendendo mais rápido e por mais valor.
                 </p>
                 <p data-reveal style="--reveal-delay: 300ms;" class="mt-4 text-gray-400 leading-relaxed">
                     Hoje somos um time de mais de 20 pessoas entre captação, edição, social media e tráfego, com uma missão clara: transformar conteúdo em um canal de vendas previsível para o mercado imobiliário de alto padrão.
@@ -558,7 +578,7 @@
                         O que diferencia a Vision?
                         <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     </summary>
-                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Unimos produção audiovisual de alto nível com estratégia de marketing e tráfego. Não entregamos só vídeos bonitos — entregamos um sistema de vendas para o seu imóvel.</p></div>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Unimos produção audiovisual de alto nível com estratégia de marketing e tráfego. Não entregamos só vídeos bonitos. Entregamos um sistema de vendas para o seu imóvel.</p></div>
                 </details>
                 <details class="faq py-5">
                     <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
@@ -579,7 +599,7 @@
                         Como a IA entra no processo?
                         <svg class="faq-icon w-5 h-5 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     </summary>
-                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Usamos IA para staging virtual, efeitos e agilidade na edição — sempre com curadoria humana. A tecnologia acelera; a criatividade continua sendo nossa.</p></div>
+                    <div class="faq-body"><p class="pt-4 text-gray-400 leading-relaxed">Usamos IA para staging virtual, efeitos e agilidade na edição, sempre com curadoria humana. A tecnologia acelera; a criatividade continua sendo nossa.</p></div>
                 </details>
                 <details class="faq py-5">
                     <summary class="flex items-center justify-between gap-4 text-white text-lg font-medium">
@@ -1046,48 +1066,5 @@
         })();
     </script>
 
-    <!-- Serviços: animação de cards com scroll (scroll-jacking) -->
-    <script>
-        (function () {
-            const section = document.getElementById('servicos');
-            const cards = document.querySelectorAll('#servicos .service-card');
-            if (!section || cards.length < 4) return;
-
-            // Acessibilidade: sem movimento, empilha os cards já no lugar
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const ov = cards[0].offsetHeight * 1.15;
-                const ends = [-ov * 1.5, -ov * 0.5, ov * 0.5, ov * 1.5];
-                cards.forEach((c, i) => { c.style.transform = 'translate(0px, ' + ends[i] + 'px)'; });
-                return;
-            }
-
-            let currentScroll = 0;
-            const lerp = (a, b, f) => a + (b - a) * f;
-
-            function frame() {
-                currentScroll = lerp(currentScroll, window.scrollY || window.pageYOffset || 0, 0.08);
-                const rect = section.getBoundingClientRect();
-                const sectionTop = currentScroll + rect.top;
-                const scrollable = section.offsetHeight - window.innerHeight;
-                let progress = scrollable > 0 ? (currentScroll - sectionTop) / scrollable : 0;
-                progress = Math.max(0, Math.min(1, progress));
-
-                const wh = window.innerHeight;
-                const overlap = cards[0].offsetHeight * 1.15;
-                const p1 = Math.min(1, progress * 4);
-                const p2 = Math.max(0, Math.min(1, (progress - 0.25) * 4));
-                const p3 = Math.max(0, Math.min(1, (progress - 0.50) * 4));
-                const p4 = Math.max(0, Math.min(1, (progress - 0.75) * 4));
-
-                cards[0].style.transform = 'translate(0px, ' + ((1 - p1) * wh + p1 * (-overlap * 1.5)) + 'px)';
-                cards[1].style.transform = 'translate(0px, ' + ((1 - p2) * wh + p2 * (-overlap * 0.5)) + 'px)';
-                cards[2].style.transform = 'translate(0px, ' + ((1 - p3) * wh + p3 * (overlap * 0.5)) + 'px)';
-                cards[3].style.transform = 'translate(0px, ' + ((1 - p4) * wh + p4 * (overlap * 1.5)) + 'px)';
-
-                requestAnimationFrame(frame);
-            }
-            frame();
-        })();
-    </script>
 </body>
 </html>
