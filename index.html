@@ -178,7 +178,7 @@
 <body class="bg-black text-gray-200">
 
     <!-- ============ Navbar ============ -->
-    <header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+    <header id="site-header" class="fixed top-0 inset-x-0 z-50">
         <nav class="relative max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
             <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Vision — início">
                 <span style="font-family: 'Archivo', sans-serif;" class="gold-text font-black lowercase leading-none tracking-tight text-2xl sm:text-3xl">vision</span>
@@ -237,7 +237,7 @@
     </section>
 
     <!-- Vão preto entre a hero e o portfólio (respiro antes da seção 2) -->
-    <div class="h-[24vh] bg-black" aria-hidden="true"></div>
+    <div class="h-[14vh] bg-black" aria-hidden="true"></div>
 
     <!-- ============ Portfólio (carrossel de vídeos) ============ -->
     <section id="portfolio" class="scroll-mt-24 pb-20 sm:pb-28 bg-black overflow-hidden">
@@ -682,8 +682,14 @@
             let scrollTicking = false;
             function onScroll() {
                 const y = window.scrollY || window.pageYOffset || 0;
-                // Header fica opaco conforme rola (0 -> 1 em ~280px)
-                if (header) header.style.backgroundColor = 'rgba(0,0,0,' + Math.min(1, y / 280) + ')';
+                // Header vira vidro fosco conforme rola: translúcido + blur (vê o fundo borrado)
+                if (header) {
+                    const k = Math.min(1, y / 240);
+                    header.style.backgroundColor = 'rgba(10,10,10,' + (k * 0.55) + ')';
+                    const blur = (k * 14) + 'px';
+                    header.style.backdropFilter = 'blur(' + blur + ')';
+                    header.style.webkitBackdropFilter = 'blur(' + blur + ')';
+                }
                 if (!reduce) {
                     // h1 sobe mais rápido que o vídeo (parallax)
                     if (heroTitle) heroTitle.style.transform = 'translateY(' + (-y * 0.35) + 'px)';
