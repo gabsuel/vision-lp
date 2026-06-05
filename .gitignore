@@ -4,3 +4,6 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# arquivo antigo travado no disco (substituido por giullia-opt.mp4)
+assets/videos/giullia-residenziale.mp4

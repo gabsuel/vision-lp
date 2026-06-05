@@ -237,7 +237,7 @@
     </section>
 
     <!-- Vão preto entre a hero e o portfólio (respiro antes da seção 2) -->
-    <div class="h-[38vh] bg-black" aria-hidden="true"></div>
+    <div class="h-[24vh] bg-black" aria-hidden="true"></div>
 
     <!-- ============ Portfólio (carrossel de vídeos) ============ -->
     <section id="portfolio" class="scroll-mt-24 pb-20 sm:pb-28 bg-black overflow-hidden">
@@ -739,8 +739,7 @@
             "assets/videos/giullia-opt.mp4",
             "assets/videos/wilton-1.mp4",
             "assets/videos/alpha-1.mp4",
-            "assets/videos/alpha-4.mp4",
-            "assets/videos/naaby-informativo.mp4"
+            "assets/videos/alpha-4.mp4"
         ];
 
         (function () {
@@ -820,11 +819,14 @@
             }
 
             // base de cada card relativo ao atual: 0=frente, +1=direita, -1=esquerda, ±2=fundo
-            function baseSlot(i) {
+            function baseSlot(i, t) {
                 const diff = ((i - current) % len + len) % len;
                 if (diff === 0) return 0;
                 if (diff === 1) return 1;
                 if (diff === len - 1) return -1;
+                // carta(s) de trás. Quando len é par, a carta de trás é única:
+                // entra pela direita ao avançar (t<=0) e pela esquerda ao voltar (t>0).
+                if (diff === 2 && diff === len - 2) return t > 0 ? -2 : 2;
                 if (diff === 2) return 2;
                 if (diff === len - 2) return -2;
                 return null; // escondido
@@ -854,7 +856,7 @@
             function render(t) {
                 const M = metrics();
                 cards.forEach((card, i) => {
-                    const base = baseSlot(i);
+                    const base = baseSlot(i, t);
                     if (base === null) { card.style.opacity = '0'; card.style.pointerEvents = 'none'; card.style.zIndex = '0'; return; }
                     const s = styleFor(base + t, M);
                     card.style.transform = 'translate(calc(-50% + ' + s.x + 'px), -50%) scale(' + s.scale + ')';
